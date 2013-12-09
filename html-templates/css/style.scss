@@ -25,7 +25,11 @@ h1{
   text-shadow: 0 1px 5px rgba(0,0,0, 0.3);
 }
 a{
-  color:$tooltip-background-color;
+  color:$primary-btn-background ;
+  text-decoration: none;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 //Form
 input[type="text"], .btn{

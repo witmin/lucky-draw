@@ -1338,7 +1338,10 @@ h1 {
   text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3); }
 
 a {
-  color: #602a25; }
+  color: #a33024;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
 
 input[type="text"], .btn {
   padding: 8px 10px;
