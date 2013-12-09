@@ -1,0 +1,59 @@
+/*
+Syntax error: Undefined variable: "$fa-css-prefix".
+        on line 4 of _icons.scss
+
+1: /* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
+2:    readers do not read off random characters that represent icons *\/
+3: 
+4: .#{$fa-css-prefix}-glass:before { content: $fa-var-glass; }
+5: .#{$fa-css-prefix}-music:before { content: $fa-var-music; }
+6: .#{$fa-css-prefix}-search:before { content: $fa-var-search; }
+7: .#{$fa-css-prefix}-envelope-o:before { content: $fa-var-envelope-o; }
+8: .#{$fa-css-prefix}-heart:before { content: $fa-var-heart; }
+9: .#{$fa-css-prefix}-star:before { content: $fa-var-star; }
+
+Backtrace:
+_icons.scss:4
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/script/tree/variable.rb:48:in `_perform'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/script/tree/node.rb:50:in `perform'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:410:in `run_interp_no_strip'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:408:in `map'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:408:in `run_interp_no_strip'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:418:in `run_interp'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:317:in `visit_rule'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:37:in `send'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:109:in `visit_children'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:128:in `visit_root'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:37:in `send'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:7:in `send'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:7:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/root_node.rb:20:in `render'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/engine.rb:265:in `render'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/plugin/compiler.rb:309:in `update_stylesheet'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/plugin/compiler.rb:182:in `update_stylesheets'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/plugin/compiler.rb:179:in `each'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/plugin/compiler.rb:179:in `update_stylesheets'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/plugin.rb:81:in `update_stylesheets'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/exec.rb:462:in `watch_or_update'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/exec.rb:324:in `process_result'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/exec.rb:41:in `parse'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/exec.rb:21:in `parse!'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/sass:9
+/usr/bin/sass:19:in `load'
+/usr/bin/sass:19
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined variable: \"$fa-css-prefix\".\A         on line 4 of _icons.scss\A \A 1: /* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen\A 2:    readers do not read off random characters that represent icons */\A 3: \A 4: .#{$fa-css-prefix}-glass:before { content: $fa-var-glass; }\A 5: .#{$fa-css-prefix}-music:before { content: $fa-var-music; }\A 6: .#{$fa-css-prefix}-search:before { content: $fa-var-search; }\A 7: .#{$fa-css-prefix}-envelope-o:before { content: $fa-var-envelope-o; }\A 8: .#{$fa-css-prefix}-heart:before { content: $fa-var-heart; }\A 9: .#{$fa-css-prefix}-star:before { content: $fa-var-star; }"; }

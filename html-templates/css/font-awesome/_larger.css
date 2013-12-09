@@ -1,0 +1,60 @@
+/*
+Syntax error: Undefined variable: "$fa-css-prefix".
+        on line 5 of _larger.scss
+
+1: // Icon Sizes
+2: // -------------------------
+3: 
+4: /* makes the font 33% larger relative to the icon container *\/
+5: .#{$fa-css-prefix}-lg {
+6:   font-size: (4em / 3);
+7:   line-height: (3em / 4);
+8:   vertical-align: -15%;
+9: }
+10: .#{$fa-css-prefix}-2x { font-size: 2em; }
+
+Backtrace:
+_larger.scss:5
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/script/tree/variable.rb:48:in `_perform'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/script/tree/node.rb:50:in `perform'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:410:in `run_interp_no_strip'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:408:in `map'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:408:in `run_interp_no_strip'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:418:in `run_interp'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:317:in `visit_rule'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:37:in `send'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:109:in `visit_children'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:128:in `visit_root'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:37:in `send'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:7:in `send'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/visitors/perform.rb:7:in `visit'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/tree/root_node.rb:20:in `render'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/engine.rb:265:in `render'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/plugin/compiler.rb:309:in `update_stylesheet'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/plugin/compiler.rb:182:in `update_stylesheets'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/plugin/compiler.rb:179:in `each'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/plugin/compiler.rb:179:in `update_stylesheets'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/plugin.rb:81:in `update_stylesheets'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/exec.rb:462:in `watch_or_update'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/exec.rb:324:in `process_result'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/exec.rb:41:in `parse'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/../lib/sass/exec.rb:21:in `parse!'
+/Users/linxinmin/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.3.0.alpha.195/bin/sass:9
+/usr/bin/sass:19:in `load'
+/usr/bin/sass:19
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined variable: \"$fa-css-prefix\".\A         on line 5 of _larger.scss\A \A 1: // Icon Sizes\A 2: // -------------------------\A 3: \A 4: /* makes the font 33% larger relative to the icon container */\A 5: .#{$fa-css-prefix}-lg {\A 6:   font-size: (4em / 3);\A 7:   line-height: (3em / 4);\A 8:   vertical-align: -15%;\A 9: }\A 10: .#{$fa-css-prefix}-2x { font-size: 2em; }"; }
