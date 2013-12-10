@@ -27,12 +27,12 @@ var connections = [];
 
 var services = [];
 
-var cadidates = [];
+var candidates = [];
 
 services['addCandidate'] = function(req, res, param) {
-    cadidates.push(param['candidate']);
+    candidates.push(param['candidate']);
     res.end();
-    boardcast(JSON.stringify(cadidates));
+    boardcast({candidate: candidates});
 };
 
 function boardcast(message) {
@@ -67,7 +67,7 @@ var server = http.createServer(function(req, res) {
     }
 });
 
-echo.installHandlers(server, {prefix:'/echo'});
+echo.installHandlers(server, {prefix:'/sock'});
 
 var port = 8888;
 console.log(' [*] Listening on 0.0.0.0:' + port );
