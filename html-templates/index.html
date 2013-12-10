@@ -5,7 +5,26 @@
     <title>Lucky Draw</title>
     <link rel="stylesheet" href="css/style.css"/>
     <script src="js/jquery-2.0.3.min.js"></script>
+	<script src="js/jquery.jSlots.js" charset="utf-8"></script> 
+	<script src="js/jquery.easing.1.3.js" charset="utf-8"></script>  
     <script src="js/view.js"></script>
+<style type="text/css">
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.jSlots-wrapper {
+    overflow: hidden;
+    height: 20px;
+    display: inline-block; /* to size correctly, can use float too, or width*/
+    border: 1px solid #999;
+}
+.slot {
+    float: left;
+}
+</style>
+	
 </head>
 <body>
 <div class="wrapper">
@@ -23,19 +42,34 @@
         <!--Form-->
         <div class="main-container" id="edit-item-container">
             <h1>Edit Items</h1>
-            <form action="" id="edit-item-form">
-                <!--Add New Item-->
-                <input type="text" placeholder="Enter item name" />
-                <button class="btn positive-btn"><i class="fa fa-plus"></i></button>
-
-                <div class="btn-set">
-                <button class="btn primary-btn">Done</button>
-                    <a href="">Cancel</a>
-                </div>
-            </form>
+			<div id="container"></div>
+			
+			<ul class="slot">  
+				<li>Derek</li>  
+				<li>Shravan</li>  
+				<li>Millie</li>  
+				<li>Mike</li>
+			</ul>    
+			<!-- this button will start the spin -->  
+			<input type="button" id="playBtn" value="play">
+			<script type="text/javascript" charset="utf-8">  
+			  
+				$('.slot').jSlots({  
+					number: 1,
+					spinner : '#playBtn'
+				});  
+			  
+			</script> 
+			
         </div>
 
     </div>
+    <script src="js/react.js"></script>
+    <script src="js/JSXTransformer.js"></script>
+    <script type="text/javascript" src="js/lodash.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/backbone-min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/backbone.localStorage-min.js" charset="utf-8"></script>
+    <script type="text/jsx" src="js/app.js"></script>
 </div>
 </body>
 </html>
