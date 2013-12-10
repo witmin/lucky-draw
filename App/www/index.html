@@ -37,7 +37,7 @@
 
 <div id="first" class="box">
     <div></div>
-    <form><input autocomplete="off" value="Type here..."></input></form>
+    <form><input autocomplete="off" value="Type here..." /></form>
 </div>
 
 <div id="candidate">
@@ -72,7 +72,8 @@
 
     var $candidate = $('#candidate form');
     $candidate.submit(function() {
-        $.post('/addCandidates', $candidate.serialize(), function() {});
+        console.log('test');
+        $.get('/addCandidate', {'candidate': $('input[name="candidate"]').val()}, function() {});
         return false;
     });
 

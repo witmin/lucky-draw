@@ -9,7 +9,6 @@ var http = require('http');
 var sockjs = require('sockjs');
 var node_static = require('node-static');
 var url = require('url');
-var $ = require('jquery');
 
 function parseQuery(query) {
     if (query == null){
@@ -17,9 +16,10 @@ function parseQuery(query) {
     }
     var queryArray = query.split('&');
     var queryAssoArray = [];
-    $.each(queryArray, function(i, v){
+    for (var i = 0; i < queryArray.length; i++) {
+        var v = queryArray[i];
         queryAssoArray[v.substring(0, v.indexOf('='))] = v.substring(v.indexOf('=') + 1);
-    });
+    }
     return queryAssoArray;
 }
 
