@@ -21,6 +21,7 @@ function parseQuery(query) {
         queryAssoArray[v.substring(0, v.indexOf('='))] = v.substring(v.indexOf('=') + 1);
     }
     return queryAssoArray;
+
 }
 
 var connections = [];
@@ -32,11 +33,24 @@ var candidates = [];
 services['addCandidate'] = function(req, res, param) {
     candidates.push(param['candidate']);
     res.end();
-    boardcast({candidate: candidates});
+    boardcast(JSON.stringify({candidates: candidates}));
+};
+
+services['removeCandidate'] = function(req, res, param) {
+    // how=.=?
+};
+
+services['rand'] = function(req, res) {
+    res.end();
+    var randomNumber = Math.random();
+    boardcast(JSON.stringify({poorMan:
+        candidates[Math.ceil(randomNumber * candidates.length) - 1]}));
 };
 
 function boardcast(message) {
-    for (var i = 0; i< connections.length; i++) {
+
+    var noOfConnection = connections.length;
+    for (var i = 0; i < noOfConnection; i++) {
         connections[i].write(message);
     }
 }
@@ -45,10 +59,10 @@ var echo = sockjs.createServer();
 echo.on('connection', function(conn) {
     connections.push(conn);
     conn.on('data', function(message) {
-        boardcast(message);
+
     });
     conn.on('close', function() {
-
+        // TODO remove the connection...
     });
 });
 

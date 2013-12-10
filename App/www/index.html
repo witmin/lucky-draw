@@ -5,8 +5,8 @@
 </head>
 <body lang="en">
 
-
-
+<div id="poor-man"></div>
+<button id="rand">Random</button>
 <div id="candidate">
     <form><input name="candidate" type="text"/></form>
     <ul></ul>
@@ -21,11 +21,18 @@
     };
 
     sockjs.onmessage = function(e) {
-        var obj = e.data;
-        var candidates = obj.candidates;
-        var list = $.map(candidates, function (e, i) {
-            return $("<li></li>").text(e);
-        });
+        var obj = JSON.parse(e.data);
+
+        if (obj.candidates) {
+            var candidates = obj.candidates;
+            var $candidateList = $('#candidate ul');
+            $candidateList.empty();
+            $.each(candidates, function(i, v) {
+                $candidateList.append($("<li></li>").text(v));
+            });
+        } else if (obj.poorMan) {
+            $('#poor-man').text(obj.poorMan);
+        }
 
     };
 
@@ -38,6 +45,10 @@
         console.log('test');
         $.get('/addCandidate', {'candidate': $('input[name="candidate"]').val()}, function() {});
         return false;
+    });
+
+    $('#rand').bind('click', function() {
+        $.get('/rand', {}, function(){});
     });
 
 </script>
