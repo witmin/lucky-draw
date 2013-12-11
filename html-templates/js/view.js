@@ -55,6 +55,8 @@
         $('#rand').bind('click', function() {
             $.get('/rand', {}, function(){});
         });
+
+        // The public API encapsulated the data accessing logic
         return {
             addCandidate: function(v) {
                 $.get('/addCandidate', {'candidate': v}, function() {});
@@ -90,7 +92,7 @@
         $('button[title="Add"]').bind('click', function() {
             var textField = $('#new-candidate');
             machine.addCandidate(textField.val());
-            textField.reset();
+            textField.val('');
         });
 
         $('#edit-item-form').submit(function() {
