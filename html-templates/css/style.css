@@ -1379,6 +1379,9 @@ ul, ol {
 
 #edit-item-form {
   width: 80%; }
+  @media only screen and (max-width: 480px) {
+    #edit-item-form {
+      width: 100%; } }
 
 input[type="text"], .btn {
   padding: 8px 10px;
@@ -1390,7 +1393,7 @@ input[type="text"], .btn {
   outline: none; }
 
 input[type="text"] {
-  width: 90%; }
+  width: 78%; }
   input[type="text"]:hover {
     background: white; }
   input[type="text"]:focus {
