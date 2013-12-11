@@ -85,8 +85,31 @@
                     })));
             });
         }, function(poorMan) {
-            $('.item-list li').removeClass('selected');
-            $('li#' + poorMan).addClass('selected');
+            function loopAndLoop(counter) {
+                var $items = $('.item-list li');
+                $items.removeClass('selected');
+                $($items.get(counter % $items.length)).addClass('selected');
+                var nextTime = 100;
+                if (counter > $items.length) {
+
+                    if ($($items.get((counter) % $items.length)).prop('id') == poorMan) {
+                        return;
+                    } else if ($($items.get((counter+1) % $items.length)).prop('id') == poorMan) {
+                        nextTime = 800;
+                    } else if ($($items.get((counter+2) % $items.length)).prop('id') == poorMan) {
+                        nextTime = 500;
+                    } else if ($($items.get((counter+3) % $items.length)).prop('id') == poorMan) {
+                        nextTime = 300;
+                    }
+                }
+                if (counter < $items.length * 2) {
+
+                    setTimeout(function() {
+                        loopAndLoop(++counter);
+                    }, nextTime);
+                }
+            }
+            loopAndLoop(0);
         });
 
         $('button[title="Add"]').bind('click', function() {

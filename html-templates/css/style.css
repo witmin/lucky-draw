@@ -1457,3 +1457,7 @@ input[type="text"] {
   .logo .tooltip {
     left: 140px;
     top: 0; }
+
+.item-list li.selected {
+    background-color: blueviolet;
+}
