@@ -2,7 +2,7 @@
 @import url(col.css);
 @import "http://fonts.googleapis.com/css?family=PT+Sans:400,700";
 @import url(animate.min.css);
-/*!
+/*
  *  Font Awesome 4.0.3 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
@@ -1331,17 +1331,54 @@
 .fa-plus-square-o:before {
   content: "\f196"; }
 
-h1 {
-  color: #fae5e5;
+body {
+  font-family: 'PT Sans', helvetica, Arial, verdana, sans-serif;
+  background: #f34433;
+  font-size: 18px;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  color: #fae5e5; }
+
+h1, h2 {
   margin: 63px 0 20px 0;
   font-size: 1.8em;
   text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3); }
+
+h2 {
+  font-size: 1.2em;
+  margin: 20px 0 0 0; }
 
 a {
   color: #a33024;
   text-decoration: none; }
   a:hover {
+    color: #fae5e5;
     text-decoration: underline; }
+
+ul, ol {
+  line-height: 1.5; }
+  ul li, ol li {
+    padding: 3px 10px; }
+
+.item-list {
+  height: 240px;
+  overflow: auto;
+  background: #602a25; }
+  .item-list a.delete {
+    display: none; }
+  .item-list li.hover {
+    color: #602a25;
+    background: #fae5e5;
+    transition: background .5s ease-out;
+    cursor: pointer; }
+    .item-list li.hover a.delete {
+      display: inline;
+      color: #602a25;
+      float: right; }
+
+#edit-item-form {
+  width: 80%; }
 
 input[type="text"], .btn {
   padding: 8px 10px;
@@ -1353,7 +1390,7 @@ input[type="text"], .btn {
   outline: none; }
 
 input[type="text"] {
-  width: 85%; }
+  width: 90%; }
   input[type="text"]:hover {
     background: white; }
   input[type="text"]:focus {
@@ -1379,14 +1416,6 @@ input[type="text"] {
   margin: 20px 0; }
   .btn-set .btn {
     margin-right: 20px; }
-
-body {
-  font-family: 'PT Sans', helvetica, Arial, verdana, sans-serif;
-  background: #f34433;
-  font-size: 18px;
-  line-height: 1;
-  margin: 0;
-  padding: 0; }
 
 .shadowed {
   -webkit-filter: drop-shadow(0 1px 5px rgba(0, 0, 0, 0.3)); }

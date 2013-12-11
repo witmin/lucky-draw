@@ -14,4 +14,14 @@ $(document).ready(function(){
         $('.tooltip').slideUp('fast');
     });
 
+// hover Added Items to add hover class
+    var deleteBtn = $('<a href="" class="delete"><i class="fa fa-minus-circle"></i></a>')
+    $('.item-list li').append(deleteBtn);
+    $('.item-list li').children('.delete');
+    $('.item-list li').mouseenter(function(){
+        $(this).addClass("hover");
+    });
+    $('.item-list li').mouseleave(function(){
+        $(this).removeClass("hover");
+    });
 });
