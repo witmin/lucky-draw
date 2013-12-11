@@ -17,21 +17,74 @@ $primary-color: #fae5e5;
 $form-input-color: #333333;
 $primary-radius: 4px;
 
-//Font
-h1{
+
+body{
+  font-family: 'PT Sans', helvetica, Arial, verdana, sans-serif;
+  background: $page-background-color;
+  font-size: 18px;
+  line-height: 1;
+  margin:0;
+  padding:0;
   color:$primary-color;
+}
+//Font
+h1, h2{
   margin:63px 0 20px 0;
   font-size:1.8em;
   text-shadow: 0 1px 5px rgba(0,0,0, 0.3);
+}
+
+h2{
+  font-size: 1.2em;
+  margin:20px 0 0 0;
 }
 a{
   color:$primary-btn-background ;
   text-decoration: none;
   &:hover{
+    color:$primary-color;
     text-decoration: underline;
   }
 }
+
+//List
+ul, ol{
+  line-height: 1.5;
+  li{
+    padding:3px 10px;
+
+  }
+}
+
+.item-list{
+  height:240px;
+  overflow: auto;
+  background: $tooltip-background-color;
+  a.delete{
+    display:none;
+  }
+  li.hover{
+    color:$tooltip-background-color;
+    background: $primary-color;
+    transition:background .5s ease-out;
+    cursor: pointer;
+    a.delete{
+      display: inline;
+      color:$tooltip-background-color;
+      float:right;
+      &:hover{
+
+      }
+    }
+  }
+}
 //Form
+#edit-item-form{
+  width:80%;
+  @media only screen and (max-width: 480px) {
+    width:100%;
+  }
+}
 input[type="text"], .btn{
   padding: 8px 10px;
   font-size:.9em;
@@ -42,7 +95,7 @@ input[type="text"], .btn{
   outline:none;
 }
 input[type="text"]{
-  width:85%;
+  width:78%;
   &:hover{
     background: white;
   }
@@ -75,15 +128,13 @@ input[type="text"]{
     margin-right:20px;
   }
 }
-//Structure
-body{
-  font-family: 'PT Sans', helvetica, Arial, verdana, sans-serif;
-  background: $page-background-color;
-  font-size: 18px;
-  line-height: 1;
-  margin:0;
-  padding:0;
+
+//Specific btn
+.start-btn{
+
 }
+//Structure
+
 //standard
 .shadowed{
   -webkit-filter: drop-shadow(0 1px 5px rgba(0,0,0, 0.3)) ;
