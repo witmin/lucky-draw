@@ -10,6 +10,15 @@ var sockjs = require('sockjs');
 var node_static = require('node-static');
 var url = require('url');
 
+Array.prototype.remove = function(e) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] == e) {
+            return this.slice(0, i).concat(this.slice(i+1));
+        }
+    }
+    return this;
+};
+
 function parseQuery(query) {
     if (query == null){
         return null;
@@ -21,7 +30,6 @@ function parseQuery(query) {
         queryAssoArray[v.substring(0, v.indexOf('='))] = v.substring(v.indexOf('=') + 1);
     }
     return queryAssoArray;
-
 }
 
 var connections = [];
@@ -30,14 +38,20 @@ var services = [];
 
 var candidates = [];
 
-services['addCandidate'] = function(req, res, param) {
-    candidates.push(param['candidate']);
-    res.end();
+var boardcastCandidates = function() {
     boardcast(JSON.stringify({candidates: candidates}));
 };
 
+services['addCandidate'] = function(req, res, param) {
+    candidates.push(param['candidate']);
+    res.end();
+    boardcastCandidates();
+};
+
 services['removeCandidate'] = function(req, res, param) {
-    // how=.=?
+    candidates = candidates.remove(param['candidate']);
+    res.end();
+    boardcastCandidates();
 };
 
 services['rand'] = function(req, res) {
@@ -58,11 +72,12 @@ function boardcast(message) {
 var echo = sockjs.createServer();
 echo.on('connection', function(conn) {
     connections.push(conn);
+    boardcastCandidates();
     conn.on('data', function(message) {
 
     });
     conn.on('close', function() {
-        // TODO remove the connection...
+        connections = connections.remove(conn);
     });
 });
 

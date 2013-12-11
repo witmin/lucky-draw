@@ -28,7 +28,9 @@
             var $candidateList = $('#candidate ul');
             $candidateList.empty();
             $.each(candidates, function(i, v) {
-                $candidateList.append($("<li></li>").text(v));
+                $candidateList.append($("<li></li>").append(v).append($('<button></button>').text('remove').bind('click', function() {
+                    $.get('/removeCandidate', { 'candidate': v }, function(){});
+                })));
             });
         } else if (obj.poorMan) {
             $('#poor-man').text(obj.poorMan);
@@ -42,7 +44,6 @@
 
     var $candidate = $('#candidate form');
     $candidate.submit(function() {
-        console.log('test');
         $.get('/addCandidate', {'candidate': $('input[name="candidate"]').val()}, function() {});
         return false;
     });
