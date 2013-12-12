@@ -1499,3 +1499,17 @@ input[type="text"] {
   -vendor-animation-duration: .5s;
   -vendor-animation-delay: 3s;
   -vendor-animation-iteration-count: infinite; }
+
+.mask {
+  background: #f34433;
+  opacity: .95;
+  position: fixed;
+  width: 100%; }
+
+#mask-top {
+  top: 0;
+  left: 0; }
+
+#mask-bottom {
+  bottom: 0;
+  left: 0; }

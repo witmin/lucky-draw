@@ -99,7 +99,7 @@ ul, ol{
   -webkit-animation-name: x-spin;
   -webkit-animation-duration: 2s;
   li{
-    line-height: 0.8;
+    line-height:0.8;
     font-weight: bold;
     -webkit-animation-name: y-spin;
     -webkit-animation-duration: 3s;
@@ -227,4 +227,19 @@ input[type="text"]{
   -vendor-animation-duration: .5s;
   -vendor-animation-delay: 3s;
   -vendor-animation-iteration-count: infinite;
+}
+
+.mask{
+  background: $page-background-color;
+  opacity: .95;
+  position: fixed;
+  width: 100%;
+}
+#mask-top{
+  top:0;
+  left:0;
+}
+#mask-bottom{
+  bottom:0;
+  left:0;
 }
