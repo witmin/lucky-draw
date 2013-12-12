@@ -12,12 +12,11 @@ $primary-btn-background: #a33024;
 $primary-btn-hover-background: #602a25;
 $positive-btn-background: #78a33c;
 $positive-btn-hover-background: #50922d;
+$positive-btn-focus-background: #407424;
   //Font color
 $primary-color: #fae5e5;
 $form-input-color: #333333;
 $primary-radius: 4px;
-
-
 body{
   font-family: 'PT Sans', helvetica, Arial, verdana, sans-serif;
   background: $page-background-color;
@@ -46,10 +45,18 @@ a{
     text-decoration: underline;
   }
 }
-
+//toggle view
+.hide{
+  display:none;
+}
+.show{
+  display:block;
+}
 //List
 ul, ol{
   line-height: 1.5;
+  list-style: none;
+  padding:0;
   li{
     padding:3px 10px;
 
@@ -60,22 +67,42 @@ ul, ol{
   height:240px;
   overflow: auto;
   background: $tooltip-background-color;
-  a.delete{
+  .delete{
     display:none;
+    float:right;
   }
-  li.hover{
-    color:$tooltip-background-color;
-    background: $primary-color;
-    transition:background .5s ease-out;
-    cursor: pointer;
-    a.delete{
-      display: inline;
-      color:$tooltip-background-color;
-      float:right;
-      &:hover{
-
+  li{
+    &.hover{
+      color:$primary-btn-background;
+      background: $primary-color;
+      transition:all .3s ease-out;
+      cursor: pointer;
+      .delete{
+        display: inline;
+        color:$primary-btn-background;
+        &:hover{
+          color:$primary-btn-hover-background;
+        }
       }
     }
+  }
+}
+
+.rolling-view-container{
+  position: relative;
+  -webkit-perspective: 800;
+}
+.rolling-list{
+  overflow-y: hidden;
+  /* Ensure that we're in 3D space */
+  -webkit-transform-style: preserve-3d;
+  -webkit-animation-name: x-spin;
+  -webkit-animation-duration: 2s;
+  li{
+    line-height:0.8;
+    font-weight: bold;
+    -webkit-animation-name: y-spin;
+    -webkit-animation-duration: 3s;
   }
 }
 //Form
@@ -120,6 +147,9 @@ input[type="text"]{
   &:hover{
     background: $positive-btn-hover-background;
   }
+  &:focus{
+    background: $positive-btn-focus-background;
+  }
 }
 
 .btn-set{
@@ -130,8 +160,16 @@ input[type="text"]{
 }
 
 //Specific btn
-.start-btn{
-
+.btn-start{
+  transition: backgrund .5s ease-out, box-shadow .5 ease-out;
+  box-shadow: 0 1px 10px 0 $positive-btn-focus-background;
+  text-shadow: 0 1px 3px $positive-btn-focus-background;
+  &:hover{
+    box-shadow:0 1px 3px 0 $positive-btn-background;
+  }
+  .fa, .text{
+    transition:all .5s;
+  }
 }
 //Structure
 
@@ -186,5 +224,26 @@ input[type="text"]{
 
 //Main Container
 .mainContainer{
+  -vendor-animation-duration: .5s;
+  -vendor-animation-delay: 3s;
+  -vendor-animation-iteration-count: infinite;
+}
 
+.mask{
+  background: $page-background-color;
+  opacity: .95;
+  position: fixed;
+  width: 100%;
+}
+#mask-top{
+  top:0;
+  left:0;
+}
+#mask-bottom{
+  bottom:0;
+  left:0;
+}
+
+//result-view-container
+.winner{
 }
