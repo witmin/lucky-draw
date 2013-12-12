@@ -86,13 +86,35 @@
             });
         }, function(poorMan) {
             function loopAndLoop(counter) {
-                var $items = $('.item-list li');
-                $items.removeClass('selected');
-                $($items.get(counter % $items.length)).addClass('selected');
+                var itemsArr = [];
+                var $items = $('.item-list li').clone().each(function(i, v){
+                    itemsArr[i] = $('<li>').append($(v).text());
+                });
+                // this is not animation...
+                var $rolling = $('ul.rolling-list');
+                var newItemsOrder = itemsArr.slice((counter - 2) % $items.length).concat(itemsArr.slice(0, (counter - 2) % $items.length));
+                $rolling.empty();
+                for (var i = 0; i < newItemsOrder.length; i++) {
+                    $rolling.append(newItemsOrder[i]);
+                }
+
                 var nextTime = 100;
+                $('.rolling-list').css({
+                    'height': winHeight-60,
+                    'width': winHeight
+                });
+                $('.rolling-list li').css({
+                    'font-size': winHeight/85 + 'em',
+                    'margin-top': '10px'
+                });
+                $('.mask').css({
+                    'height': winHeight/2.6
+                });
                 if (counter > $items.length) {
 
                     if ($($items.get((counter) % $items.length)).prop('id') == poorMan) {
+
+                        $('#winner-span').text(poorMan);
                         return;
                     } else if ($($items.get((counter+1) % $items.length)).prop('id') == poorMan) {
                         nextTime = 800;

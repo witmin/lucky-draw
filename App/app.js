@@ -20,16 +20,7 @@ Array.prototype.remove = function(e) {
 };
 
 function parseQuery(query) {
-    if (query == null){
-        return null;
-    }
-    var queryArray = query.split('&');
-    var queryAssoArray = [];
-    for (var i = 0; i < queryArray.length; i++) {
-        var v = queryArray[i];
-        queryAssoArray[v.substring(0, v.indexOf('='))] = v.substring(v.indexOf('=') + 1);
-    }
-    return queryAssoArray;
+    return query;
 }
 
 var connections = [];
@@ -43,13 +34,14 @@ var boardcastCandidates = function() {
 };
 
 services['addCandidate'] = function(req, res, param) {
-    candidates.push(param['candidate']);
+    console.log(JSON.stringify(param));
+    candidates.push(param.candidate);
     res.end();
     boardcastCandidates();
 };
 
 services['removeCandidate'] = function(req, res, param) {
-    candidates = candidates.remove(param['candidate']);
+    candidates = candidates.remove(param.candidate);
     res.end();
     boardcastCandidates();
 };
@@ -86,7 +78,7 @@ var staticServer = new node_static.Server(__dirname + "/../html-templates");
 var server = http.createServer(function(req, res) {
     var uri;
     var requestUrl = req.url;
-    var urlParts = url.parse(requestUrl);
+    var urlParts = url.parse(requestUrl, true);
     uri = urlParts.pathname;
     var serviceName = uri.substring(1);
     if (typeof services[serviceName] != 'function') {
