@@ -124,6 +124,7 @@
 
 //    Page Loading Animate
         $('.logo').addClass('animated slideInLeft');
+
 //    Tooltip
         $('.tooltip').hide();
         $('.tooltip-container').mouseenter(function(){
@@ -134,19 +135,20 @@
             $('.tooltip').slideUp('fast');
         });
 
-// hover Added Items to add hover class
-//        var deleteBtn = $('<span href="" class="delete"><i class="fa fa-minus-circle"></i></span>').bind('click', function() {
-//            // Lazy implementation :P
-//            machine.removeCandidate("");
-//        });
-//        $('.item-list li').append(deleteBtn);
-//        $('.item-list li').children('.delete');
-//        $('.item-list li').mouseenter(function(){
-//            $(this).addClass("hover");
-//        });
-//        $('.item-list li').mouseleave(function(){
-//            $(this).removeClass("hover");
-//        });
+//        Toggle Edit Items View
+        $('#start-view-container').addClass('animated fadeInDown');
+        $('#edit-item-container').addClass('hide');
+        $('.logo').click(function(){
+            $('.main-container').removeClass('show animated fadeOutUp');
+            $('.main-container').addClass('hide');
+            $('#edit-item-container').addClass('show animated fadeInDown');
+        });
+        $('#edit-item-container .btn-done').click(function(){
+            $('.main-container').removeClass('show animated fadeOutUp');
+            $('.main-container').addClass('hide');
+            $('#start-view-container').addClass('show animated fadeInDown');
+        });
+
 
 //    Define the responsive round START button
         var winHeight = $(window).height();
@@ -154,8 +156,8 @@
         var updateStartButtonStyle = function(){
             winHeight = $(window).height();
             $('.start-btn').css({
-                'height' :  winHeight/2,
-                'width' : winHeight/2,
+                'height' :  winHeight/1.5,
+                'width' : winHeight/1.5,
                 'border-radius': ($(this).width())/2
             });
             $('.start-btn i.fa-compass').css({

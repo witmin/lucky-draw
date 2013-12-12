@@ -16,8 +16,6 @@ $positive-btn-hover-background: #50922d;
 $primary-color: #fae5e5;
 $form-input-color: #333333;
 $primary-radius: 4px;
-
-
 body{
   font-family: 'PT Sans', helvetica, Arial, verdana, sans-serif;
   background: $page-background-color;
@@ -46,7 +44,14 @@ a{
     text-decoration: underline;
   }
 }
+//toggle view
+.hide{
+  display:none;
 
+}
+.show{
+  display:inherit;
+}
 //List
 ul, ol{
   line-height: 1.5;
@@ -60,20 +65,24 @@ ul, ol{
   height:240px;
   overflow: auto;
   background: $tooltip-background-color;
-  a.delete{
+  list-style: none;
+  padding:0;
+  .delete{
     display:none;
+    float:right;
   }
-  li.hover{
-    color:$tooltip-background-color;
-    background: $primary-color;
-    transition:background .5s ease-out;
-    cursor: pointer;
-    a.delete{
-      display: inline;
-      color:$tooltip-background-color;
-      float:right;
-      &:hover{
-
+  li{
+    &.hover{
+      color:$primary-btn-background;
+      background: $primary-color;
+      transition:all .3s ease-out;
+      cursor: pointer;
+      .delete{
+        display: inline;
+        color:$primary-btn-background;
+        &:hover{
+          color:$primary-btn-hover-background;
+        }
       }
     }
   }
@@ -186,5 +195,7 @@ input[type="text"]{
 
 //Main Container
 .mainContainer{
-
+  -vendor-animation-duration: 3s;
+  -vendor-animation-delay: 2s;
+  -vendor-animation-iteration-count: infinite;
 }

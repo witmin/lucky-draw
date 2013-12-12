@@ -1356,6 +1356,12 @@ a {
     color: #fae5e5;
     text-decoration: underline; }
 
+.hide {
+  display: none; }
+
+.show {
+  display: inherit; }
+
 ul, ol {
   line-height: 1.5; }
   ul li, ol li {
@@ -1364,18 +1370,22 @@ ul, ol {
 .item-list {
   height: 240px;
   overflow: auto;
-  background: #602a25; }
-  .item-list a.delete {
-    display: none; }
+  background: #602a25;
+  list-style: none;
+  padding: 0; }
+  .item-list .delete {
+    display: none;
+    float: right; }
   .item-list li.hover {
-    color: #602a25;
+    color: #a33024;
     background: #fae5e5;
-    transition: background .5s ease-out;
+    transition: all .3s ease-out;
     cursor: pointer; }
-    .item-list li.hover a.delete {
+    .item-list li.hover .delete {
       display: inline;
-      color: #602a25;
-      float: right; }
+      color: #a33024; }
+      .item-list li.hover .delete:hover {
+        color: #602a25; }
 
 #edit-item-form {
   width: 80%; }
@@ -1458,6 +1468,7 @@ input[type="text"] {
     left: 140px;
     top: 0; }
 
-.item-list li.selected {
-    background-color: blueviolet;
-}
+.mainContainer {
+  -vendor-animation-duration: 3s;
+  -vendor-animation-delay: 2s;
+  -vendor-animation-iteration-count: infinite; }
