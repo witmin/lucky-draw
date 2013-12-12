@@ -135,9 +135,10 @@
             $('.tooltip').slideUp('fast');
         });
 
-//        Toggle Edit Items View
+//        Toggle Views
         $('#start-view-container').addClass('animated fadeInDown');
         $('#edit-item-container').addClass('hide');
+        $('#rolling-view-container').addClass('hide');
         $('.logo').click(function(){
             $('.main-container').removeClass('show animated fadeOutUp');
             $('.main-container').addClass('hide');
@@ -148,6 +149,11 @@
             $('.main-container').addClass('hide');
             $('#start-view-container').addClass('show animated fadeInDown');
         });
+        $('#start-view-container .btn-start').click(function(){
+            $('.main-container').removeClass('show animated fadeOutUp');
+            $('.main-container').addClass('hide');
+            $('#rolling-view-container').addClass('show animated fadeInDown');
+        });
 
 
 //    Define the responsive round START button
@@ -155,15 +161,18 @@
 
         var updateStartButtonStyle = function(){
             winHeight = $(window).height();
-            $('.start-btn').css({
+            $('.btn-start').css({
                 'height' :  winHeight/1.5,
                 'width' : winHeight/1.5,
                 'border-radius': ($(this).width())/2
             });
-            $('.start-btn i.fa-compass').css({
-                'font-size': winHeight/($(this).width())*10  + 'em'
+            $('.btn-start i.fa-compass').css({
+                'font-size': winHeight/($(this).width())*15  + 'em'
             });
-            $('.start-btn span.text').css({
+            $('.btn-start .text').css({
+                'font-size': winHeight/($(this).width())*15  + 'em'
+            });
+            $('.btn-start span.text').css({
                 'font-size': winHeight/($(this).width())*10  + 'em'
             });
         }
@@ -173,15 +182,20 @@
             updateStartButtonStyle();
         });
 
-        $('.start-btn').bind('click', function() {
+        $('.btn-start').bind('click', function() {
             machine.rand();
         });
 
-        var textGo = $('');
-        $('.start-btn').mouseenter(function(){
-            $(this).children('i.fa-compass').hide();
-
+//        Load Start Button View
+        $('.btn-start .text').addClass('hide animated');
+        $('.btn-start .fa-compass').addClass('show animated rotateIn');
+        $('.btn-start').mouseenter(function(){
+            $(this).children('.fa-compass').removeClass('show');
+            $(this).children('.fa-compass').addClass('hide rotateOut');
+            $(this).children('.text').removeClass('hide flipOutX');
+            $(this).children('.text').addClass('show flipInX');
         });
+
 
     });
 })(jQuery, window, document);
