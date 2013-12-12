@@ -87,6 +87,24 @@ ul, ol{
     }
   }
 }
+
+.rolling-view-container{
+  position: relative;
+  -webkit-perspective: 800;
+}
+.rolling-list{
+  overflow-y: hidden;
+  /* Ensure that we're in 3D space */
+  -webkit-transform-style: preserve-3d;
+  -webkit-animation-name: x-spin;
+  -webkit-animation-duration: 2s;
+  li{
+    line-height: 0.8;
+    font-weight: bold;
+    -webkit-animation-name: y-spin;
+    -webkit-animation-duration: 3s;
+  }
+}
 //Form
 #edit-item-form{
   width:80%;

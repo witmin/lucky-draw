@@ -1387,6 +1387,22 @@ ul, ol {
       .item-list li.hover .delete:hover {
         color: #602a25; }
 
+.rolling-view-container {
+  position: relative;
+  -webkit-perspective: 800; }
+
+.rolling-list {
+  overflow-y: hidden;
+  /* Ensure that we're in 3D space */
+  -webkit-transform-style: preserve-3d;
+  -webkit-animation-name: x-spin;
+  -webkit-animation-duration: 2s; }
+  .rolling-list li {
+    line-height: 0.8;
+    font-weight: bold;
+    -webkit-animation-name: y-spin;
+    -webkit-animation-duration: 3s; }
+
 #edit-item-form {
   width: 80%; }
   @media only screen and (max-width: 480px) {

@@ -175,6 +175,15 @@
             $('.btn-start span.text').css({
                 'font-size': winHeight/($(this).width())*10  + 'em'
             });
+
+            //            Rolling List
+            $('.rolling-list').css({
+                'height': winHeight-60,
+                'width': winHeight
+            });
+            $('.rolling-list li').css({
+                'font-size': winHeight/100 + 'em'
+            });
         }
 
         updateStartButtonStyle();
