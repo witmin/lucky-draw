@@ -139,6 +139,7 @@
         $('#start-view-container').addClass('animated fadeInDown');
         $('#edit-item-container').addClass('hide');
         $('#rolling-view-container').addClass('hide');
+        $('#result-view-container').addClass('hide');
         $('.logo').click(function(){
             $('.main-container').removeClass('show animated fadeOutUp');
             $('.main-container').addClass('hide');
@@ -149,10 +150,15 @@
             $('.main-container').addClass('hide');
             $('#start-view-container').addClass('show animated fadeInDown');
         });
-        $('#start-view-container .btn-start').click(function(){
+        $('.btn-start').click(function(){
             $('.main-container').removeClass('show animated fadeOutUp');
             $('.main-container').addClass('hide');
             $('#rolling-view-container').addClass('show animated fadeInDown');
+        });
+        $('#rolling-view-container').click(function(){
+            $('.main-container').removeClass('show animated fadeOutUp');
+            $('.main-container').addClass('hide');
+            $('#result-view-container').addClass('show animated fadeInDown');
         });
 
 
@@ -176,7 +182,7 @@
                 'font-size': winHeight/($(this).width())*10  + 'em'
             });
 
-            //            Rolling List
+            //Rolling List
             $('.rolling-list').css({
                 'height': winHeight-60,
                 'width': winHeight
@@ -187,6 +193,20 @@
             });
             $('.mask').css({
                 'height': winHeight/2.6
+            });
+
+            //Result View
+            $('.winner').css({
+                'font-size': winHeight/85 + 'em',
+                'margin-top': winHeight/3
+            });
+            $('#result-view-container .btn-start').css({
+                'height' :  winHeight/5,
+                'width' : winHeight/5,
+                'border-radius': ($(this).width())/2
+            });
+            $('#result-view-container .btn-start span.text').css({
+                'font-size': winHeight/($(this).width())*3  + 'em'
             });
         }
 
