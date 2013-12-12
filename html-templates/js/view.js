@@ -175,9 +175,6 @@
             $('.btn-start i.fa-compass').css({
                 'font-size': winHeight/($(this).width())*15  + 'em'
             });
-            $('.btn-start .text').css({
-                'font-size': winHeight/($(this).width())*15  + 'em'
-            });
             $('.btn-start span.text').css({
                 'font-size': winHeight/($(this).width())*10  + 'em'
             });
@@ -197,13 +194,16 @@
 
             //Result View
             $('.winner').css({
-                'font-size': winHeight/85 + 'em',
+                'font-size': winHeight/100 + 'em',
                 'margin-top': winHeight/3
             });
             $('#result-view-container .btn-start').css({
                 'height' :  winHeight/5,
                 'width' : winHeight/5,
                 'border-radius': ($(this).width())/2
+            });
+            $('#result-view-container .btn-start i.fa-compass').css({
+                'font-size': winHeight/($(this).width())*5  + 'em'
             });
             $('#result-view-container .btn-start span.text').css({
                 'font-size': winHeight/($(this).width())*3  + 'em'
