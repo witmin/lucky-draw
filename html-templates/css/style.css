@@ -1356,16 +1356,23 @@ a {
     color: #fae5e5;
     text-decoration: underline; }
 
+a.delete-all i {
+  margin-right: 5px; }
+
 .hide {
   display: none; }
 
 .show {
   display: block; }
 
+.text-right {
+  text-align: right; }
+
 ul, ol {
   line-height: 1.5;
   list-style: none;
-  padding: 0; }
+  padding: 0;
+  margin: 10px 0 5px 0; }
   ul li, ol li {
     padding: 3px 10px; }
 
@@ -1444,7 +1451,7 @@ input[type="text"] {
     background: #407424; }
 
 .btn-set {
-  margin: 20px 0; }
+  margin: 0 0 20px 0; }
   .btn-set .btn {
     margin-right: 20px; }
 
@@ -1499,17 +1506,3 @@ input[type="text"] {
   -vendor-animation-duration: .5s;
   -vendor-animation-delay: 3s;
   -vendor-animation-iteration-count: infinite; }
-
-.mask {
-  background: #f34433;
-  opacity: .95;
-  position: fixed;
-  width: 100%; }
-
-#mask-top {
-  top: 0;
-  left: 0; }
-
-#mask-bottom {
-  bottom: 0;
-  left: 0; }

@@ -45,6 +45,11 @@ a{
     text-decoration: underline;
   }
 }
+a.delete-all{
+  i{
+    margin-right: 5px;
+  }
+}
 //toggle view
 .hide{
   display:none;
@@ -52,11 +57,15 @@ a{
 .show{
   display:block;
 }
+.text-right{
+  text-align: right;
+}
 //List
 ul, ol{
   line-height: 1.5;
   list-style: none;
   padding:0;
+  margin: 10px 0 5px 0;
   li{
     padding:3px 10px;
 
@@ -153,7 +162,7 @@ input[type="text"]{
 }
 
 .btn-set{
-  margin: 20px 0;
+  margin: 0 0 20px 0;
   .btn{
     margin-right:20px;
   }
@@ -229,20 +238,6 @@ input[type="text"]{
   -vendor-animation-iteration-count: infinite;
 }
 
-.mask{
-  background: $page-background-color;
-  opacity: .95;
-  position: fixed;
-  width: 100%;
-}
-#mask-top{
-  top:0;
-  left:0;
-}
-#mask-bottom{
-  bottom:0;
-  left:0;
-}
 
 //result-view-container
 .winner{

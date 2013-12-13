@@ -204,14 +204,12 @@
             //Rolling List
             $('.rolling-list').css({
                 'height': winHeight-60,
-                'width': winHeight
+                'width': '100%',
+                'overflow':'hidden'
             });
             $('.rolling-list li').css({
-                'font-size': winHeight/85 + 'em',
+                'font-size': winHeight/15,
                 'margin-top': '10px'
-            });
-            $('.mask').css({
-                'height': winHeight/2.6
             });
 
             //Result View
