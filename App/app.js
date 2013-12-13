@@ -46,6 +46,12 @@ services['removeCandidate'] = function(req, res, param) {
     boardcastCandidates();
 };
 
+services['clearCandidates'] = function(req, res) {
+    candidates = [];
+    res.end();
+    boardcastCandidates();
+};
+
 services['rand'] = function(req, res) {
     res.end();
     var randomNumber = Math.random();

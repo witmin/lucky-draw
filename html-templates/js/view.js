@@ -62,6 +62,10 @@
                 $.get('/addCandidate', {'candidate': v}, function() {});
             },
             removeCandidate: removeCandidate,
+            clearCandidates: function() {
+                $.get('/clearCandidates', {}, function() {});
+
+            },
             rand: function() {
                 $.get('/rand', {}, function(){});
             }
@@ -247,6 +251,10 @@
             $(this).children('.fa-compass').addClass('hide rotateOut');
             $(this).children('.text').removeClass('hide flipOutX');
             $(this).children('.text').addClass('show flipInX');
+        });
+
+        $('.delete-all').bind('click', function() {
+            machine.clearCandidates();
         });
 
 
