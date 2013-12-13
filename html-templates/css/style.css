@@ -1341,6 +1341,13 @@ body {
   color: #fae5e5;
   overflow-x: hidden; }
 
+.wrapper {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  float: left; }
+
 h1, h2 {
   margin: 63px 0 20px 0;
   font-size: 1.8em;
@@ -1522,5 +1529,6 @@ input[type="text"] {
   left: 0; }
 
 #mask-bottom {
-  bottom: 0;
+  height: 100px;
+  top: 0;
   left: 0; }
