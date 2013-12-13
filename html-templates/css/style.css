@@ -1333,7 +1333,7 @@
 
 body {
   font-family: 'PT Sans', helvetica, Arial, verdana, sans-serif;
-  background: #f34433;
+  background: #f34433 url("../images/bg_stars.svg") no-repeat top left;
   font-size: 18px;
   line-height: 1;
   margin: 0;
@@ -1407,7 +1407,7 @@ ul, ol {
   -webkit-animation-name: x-spin;
   -webkit-animation-duration: 2s; }
   .rolling-list li {
-    line-height: 0.8;
+    line-height: .8;
     font-weight: bold;
     -webkit-animation-name: y-spin;
     -webkit-animation-duration: 3s; }
@@ -1504,10 +1504,12 @@ input[type="text"] {
     left: 140px;
     top: 0; }
 
-.mainContainer {
+.main-container {
   -vendor-animation-duration: .5s;
   -vendor-animation-delay: 3s;
-  -vendor-animation-iteration-count: infinite; }
+  -vendor-animation-iteration-count: infinite;
+  width: 100%;
+  height: 100%; }
 
 .mask {
   background: #f34433;
