@@ -1351,7 +1351,8 @@ h2 {
 
 a {
   color: #a33024;
-  text-decoration: none; }
+  text-decoration: none;
+  cursor: pointer; }
   a:hover {
     color: #fae5e5;
     text-decoration: underline; }

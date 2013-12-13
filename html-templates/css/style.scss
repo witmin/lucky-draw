@@ -40,6 +40,7 @@ h2{
 a{
   color:$primary-btn-background ;
   text-decoration: none;
+  cursor: pointer;
   &:hover{
     color:$primary-color;
     text-decoration: underline;
