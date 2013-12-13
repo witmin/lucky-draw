@@ -1414,7 +1414,7 @@ ul, ol {
   -webkit-animation-name: x-spin;
   -webkit-animation-duration: 2s; }
   .rolling-list li {
-    line-height: .8;
+    line-height: 0.78;
     font-weight: bold;
     -webkit-animation-name: y-spin;
     -webkit-animation-duration: 3s; }
@@ -1534,7 +1534,7 @@ input[type="text"] {
   left: 0; }
 
 #mask-bottom {
-  background: -moz-linear-gradient(top, rgba(243, 68, 51, 0) 0%, rgba(243, 68, 51, 0.95) 1%);
+  background: -moz-linear-gradient(top, rgba(243, 68, 51, 0) 0%, rgba(243, 68, 51, 0.95) 15%);
   /* FF3.6+ */
   background: -webkit-linear-gradient(top, rgba(243, 68, 51, 0) 0%, rgba(243, 68, 51, 0.95) 15%);
   /* Chrome10+,Safari5.1+ */
