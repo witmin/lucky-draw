@@ -25,6 +25,7 @@ body{
   margin:0;
   padding:0;
   color:$primary-color;
+  overflow-x: hidden;
 }
 //Font
 h1, h2{
@@ -239,6 +240,20 @@ input[type="text"]{
   -vendor-animation-iteration-count: infinite;
 }
 
+.mask{
+  background: $page-background-color;
+  opacity: .95;
+  position: fixed;
+  width: 100%;
+}
+#mask-top{
+  top:0;
+  left:0;
+}
+#mask-bottom{
+  bottom:0;
+  left:0;
+}
 
 //result-view-container
 .winner{
