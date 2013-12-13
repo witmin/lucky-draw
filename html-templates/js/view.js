@@ -229,11 +229,11 @@
                 'margin-top': '10px'
             });
             $('#mask-top').css({
-                'height': winHeight/3
+                'height': winHeight/2
             });
             $('#mask-bottom').css({
                 'height':winHeight/10,
-                'top': winHeight/1.8
+                'top': winHeight/1.69
             });
 
             //Result View
