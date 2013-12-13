@@ -1386,7 +1386,7 @@ ul, ol {
     padding: 3px 10px; }
 
 .item-list {
-  height: 240px;
+  height: 300px;
   overflow: auto;
   background: #602a25; }
   .item-list .delete {
@@ -1532,3 +1532,6 @@ input[type="text"] {
   height: 100px;
   top: 0;
   left: 0; }
+
+.winner .fa-trophy {
+  margin-right: 6px; }
