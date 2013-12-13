@@ -119,6 +119,12 @@
                     if ($($items.get((counter) % $items.length)).prop('id') == poorMan) {
 
                         $('#winner-span').text(poorMan);
+                        setTimeout(function() {
+
+                            $('.main-container').removeClass('show animated fadeOutUp');
+                            $('.main-container').addClass('hide');
+                            $('#result-view-container').addClass('show animated fadeInDown');
+                        }, 1000);
                         return;
                     } else if ($($items.get((counter+1) % $items.length)).prop('id') == poorMan) {
                         nextTime = 800;
@@ -181,11 +187,11 @@
             $('.main-container').addClass('hide');
             $('#rolling-view-container').addClass('show animated fadeInDown');
         });
-        $('#rolling-view-container').click(function(){
-            $('.main-container').removeClass('show animated fadeOutUp');
-            $('.main-container').addClass('hide');
-            $('#result-view-container').addClass('show animated fadeInDown');
-        });
+//        $('#rolling-view-container').click(function(){
+//            $('.main-container').removeClass('show animated fadeOutUp');
+//            $('.main-container').addClass('hide');
+//            $('#result-view-container').addClass('show animated fadeInDown');
+//        });
 
 
 //    Define the responsive round START button
