@@ -83,7 +83,7 @@
                         $(this).removeClass("hover");
                     })
                     .append(v)
-                    .append($('<span href="" class="delete"><i class="fa fa-minus-circle"></i></span>').bind('click', function() {
+                    .append($('<span href="" class="delete" title="Delete"><i class="fa fa-minus-circle"></i></span>').bind('click', function() {
                         // Lazy implementation :P
                         machine.removeCandidate($(this).parent().prop('id'));
                     })));
@@ -189,17 +189,6 @@
             $('.main-container').addClass('hide');
             $('#start-view-container').addClass('show animated fadeInDown');
         });
-//        $('.btn-start').click(function(){
-//            $('.main-container').removeClass('show animated fadeOutUp');
-//            $('.main-container').addClass('hide');
-//            $('#rolling-view-container').addClass('show animated fadeInDown');
-//        });
-//        $('#rolling-view-container').click(function(){
-//            $('.main-container').removeClass('show animated fadeOutUp');
-//            $('.main-container').addClass('hide');
-//            $('#result-view-container').addClass('show animated fadeInDown');
-//        });
-
 
 //    Define the responsive round START button
         var winHeight = $(window).height();
@@ -233,7 +222,7 @@
             });
             $('#mask-bottom').css({
                 'height':winHeight/10,
-                'top': winHeight/1.69
+                'top': winHeight/1.8
             });
 
             //Result View
