@@ -201,10 +201,10 @@
                 'border-radius': ($(this).width())/2
             });
             $('.btn-start i.fa-compass').css({
-                'font-size': $('.btn-start').height()/2
+                'font-size': $('.btn-start').height()/2.5
             });
             $('.btn-start span.text').css({
-                'font-size': $('.btn-start').height()/2
+                'font-size': $('.btn-start').height()/2.5
             });
 
             //Rolling List
@@ -240,7 +240,7 @@
                 'font-size': $('#result-view-container .btn-start').height()/2
             });
             $('#result-view-container .btn-start span.text').css({
-                'font-size': $('#result-view-container .btn-start').height()/2
+                'font-size': $('#result-view-container .btn-start').height()/5
             });
         }
 
