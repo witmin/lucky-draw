@@ -221,6 +221,9 @@
                 'font-size': winHeight/15,
                 'margin-top': '10px'
             });
+            $('.mask').css({
+                'height': winHeight/2.6
+            });
 
             //Result View
             $('.winner').css({
@@ -228,8 +231,8 @@
                 'margin-top': winHeight/3
             });
             $('#result-view-container .btn-start').css({
-                'height' :  winHeight/5,
-                'width' : winHeight/5,
+                'height' :  winHeight/6,
+                'width' : winHeight/6,
                 'border-radius': ($(this).width())/2
             });
             $('#result-view-container .btn-start i.fa-compass').css({
