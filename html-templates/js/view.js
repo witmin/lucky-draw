@@ -221,6 +221,7 @@
                 'height': winHeight/2
             });
             $('#mask-bottom').css({
+
                 'height':winHeight/10,
                 'top': winHeight/1.8
             });

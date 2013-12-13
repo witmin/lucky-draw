@@ -82,7 +82,7 @@ ul, ol{
 }
 
 .item-list{
-  height:300px;
+  height:284px;
   overflow: auto;
   background: $tooltip-background-color;
   .delete{
@@ -250,16 +250,23 @@ input[type="text"]{
 }
 
 .mask{
-  background: $page-background-color;
+//  background: $page-background-color;
   opacity: .95;
   position: fixed;
   width: 100%;
 }
 #mask-top{
+  background: -moz-linear-gradient(top, rgba(243,68,51,0.95) 85%, rgba(243,68,51,0) 100%); /* FF3.6+ */
+  background: -webkit-linear-gradient(top, rgba(243,68,51,0.95) 85%,rgba(243,68,51,0) 100%); /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(to bottom, rgba(243,68,51,0.95) 85%,rgba(243,68,51,0) 100%); /* W3C */
+
   top:0;
   left:0;
 }
 #mask-bottom{
+  background: -moz-linear-gradient(top, rgba(243,68,51,0) 0%, rgba(243,68,51,0.95) 15%); /* FF3.6+ */
+  background: -webkit-linear-gradient(top, rgba(243,68,51,0) 0%,rgba(243,68,51,0.95) 15%); /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(to bottom, rgba(243,68,51,0) 0%, rgba(243,68,51,0.95) 15%); /* W3C */
   height: 100px;
   top:0;
   left:0;
@@ -267,6 +274,6 @@ input[type="text"]{
 
 .winner{
   .fa-trophy{
-    margin-right:6px;
+    margin-right:4px;
   }
 }
