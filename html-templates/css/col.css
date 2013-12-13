@@ -61,15 +61,15 @@
 
 @media only screen and (max-width: 480px) {
     .col{
-        margin: 1%;
+        margin:2%;
     }
     .span_3_of_3 {
-        width: 98%;
+        width: 96%;
     }
     .span_2_of_3 {
-        width: 98%;
+        width: 96%;
     }
     .span_1_of_3 {
-        width: 98%;
+        width: 96%;
     }
 }
