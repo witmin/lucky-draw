@@ -119,7 +119,7 @@
                     if ($($items.get((counter) % $items.length)).prop('id') == poorMan) {
 
                         $('#winner-span').text(poorMan);
-                        newItemsOrder[2].css('background-color', 'purple');
+//                        newItemsOrder[2].css('background-color', 'purple');
                         setTimeout(function() {
 
                             $('.main-container').removeClass('show animated fadeOutUp');
