@@ -35,9 +35,12 @@ var boardcastCandidates = function() {
 
 services['addCandidate'] = function(req, res, param) {
     console.log(JSON.stringify(param));
-    candidates.push(param.candidate);
-    res.end();
-    boardcastCandidates();
+	var val = param.candidate;
+	if(val && val !== ""){
+		candidates.push(param.candidate);
+		res.end();
+		boardcastCandidates();
+	}
 };
 
 services['removeCandidate'] = function(req, res, param) {

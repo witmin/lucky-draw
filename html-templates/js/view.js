@@ -5,16 +5,6 @@
 
     $(document).ready(function(){
 
-        $('button[title="Add"]').bind('click', function() {
-/*            var textField = $('#new-candidate');
-            machine.addCandidate(textField.val());
-            textField.val('');*/
-        });
-
-        $('#edit-item-form').submit(function() {
-            return false;
-        });
-
 //    Page Loading Animate
         $('.logo').addClass('animated slideInLeft');
 
@@ -43,17 +33,6 @@
             $('.main-container').addClass('hide');
             $('#start-view-container').addClass('show animated fadeInDown');
         });
-        $('.btn-start').click(function(){
-            $('.main-container').removeClass('show animated fadeOutUp');
-            $('.main-container').addClass('hide');
-            $('#rolling-view-container').addClass('show animated fadeInDown');
-        });
-        $('#rolling-view-container').click(function(){
-            $('.main-container').removeClass('show animated fadeOutUp');
-            $('.main-container').addClass('hide');
-            $('#result-view-container').addClass('show animated fadeInDown');
-        });
-
 
 //    Define the responsive round START button
         var winHeight = $(window).height();
@@ -66,40 +45,46 @@
                 'border-radius': ($(this).width())/2
             });
             $('.btn-start i.fa-compass').css({
-                'font-size': winHeight/($(this).width())*15  + 'em'
-            });
-            $('.btn-start .text').css({
-                'font-size': winHeight/($(this).width())*15  + 'em'
+                'font-size': $('.btn-start').height()/2.5
             });
             $('.btn-start span.text').css({
-                'font-size': winHeight/($(this).width())*10  + 'em'
+                'font-size': $('.btn-start').height()/2.5
             });
 
             //Rolling List
             $('.rolling-list').css({
-                'height': winHeight-60,
-                'width': winHeight
+                'height': winHeight,
+                'width': '100%',
+                'overflow':'hidden'
             });
             $('.rolling-list li').css({
-                'font-size': winHeight/85 + 'em',
-                'margin-top': '10px'
+                'font-size': winHeight/20
             });
-            $('.mask').css({
-                'height': winHeight/2.6
+            $('#mask-top').css({
+                'height': winHeight/2.5
+            });
+            $('#mask-bottom').css({
+
+                'height':winHeight/10,
+                'top': winHeight/1.8
             });
 
             //Result View
             $('.winner').css({
-                'font-size': winHeight/85 + 'em',
-                'margin-top': winHeight/3
+                'font-size': winHeight/100 + 'em',
+                'margin-top': winHeight/3.5
             });
             $('#result-view-container .btn-start').css({
                 'height' :  winHeight/5,
                 'width' : winHeight/5,
-                'border-radius': ($(this).width())/2
+                'border-radius': ($(this).width())/2,
+                'margin-top': winHeight/8
+            });
+            $('#result-view-container .btn-start i.fa-compass').css({
+                'font-size': $('#result-view-container .btn-start').height()/2
             });
             $('#result-view-container .btn-start span.text').css({
-                'font-size': winHeight/($(this).width())*3  + 'em'
+                'font-size': $('#result-view-container .btn-start').height()/5
             });
         }
 
@@ -121,7 +106,6 @@
             $(this).children('.text').removeClass('hide flipOutX');
             $(this).children('.text').addClass('show flipInX');
         });
-
 
     });
 })(jQuery, window, document);
