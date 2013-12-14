@@ -2,10 +2,6 @@
 
 var Machine = function(updateCandidatesCallback, resultCallback) {
 
-	resultCallback = resultCallback || function(poorMan) {
-		$('#poor-man').text(poorMan);
-	};
-
 	var sockjs_url = '/sock';
 	var sockjs = new SockJS(sockjs_url);
 
@@ -19,7 +15,6 @@ var Machine = function(updateCandidatesCallback, resultCallback) {
 		} else if (obj.poorMan) {
 			resultCallback(obj.poorMan);
 		}
-
 	};
 
 	sockjs.onclose = function() {};
@@ -48,13 +43,10 @@ var Machine = function(updateCandidatesCallback, resultCallback) {
 var machine;
 
 var TodoList = React.createClass({
-  remove: function(itemText){
-	machine.removeCandidate(itemText);
-  },
   render: function() {
-	var reactCpn = this;
+	var onDelete = this.props.onDelete;
     var createItem = function(itemText) {	
-      return <li id={itemText}>{itemText}<span className="delete" title="Delete" onClick={reactCpn.remove.bind(this,itemText)}><i className="fa fa-minus-circle"></i></span></li>
+      return <li id={itemText}>{itemText}<span className="delete" title="Delete" onClick={onDelete.bind(this,itemText)}><i className="fa fa-minus-circle"></i></span></li>
     };
     return <ul className="item-list">{this.props.items.map(createItem)}</ul>;
   }
@@ -139,9 +131,12 @@ var TodoApp = React.createClass({
 	this.refs.newField.getDOMNode().value = "";	
 	machine.addCandidate(val);
   },
+  handleDelete: function(val){
+	machine.removeCandidate(val);
+  },
   handleDeleteAll: function(e){
 	machine.clearCandidates();  
-  },
+  },  
   handleInputDone: function(e){
      $('.main-container').removeClass('show animated fadeOutUp');
      $('.main-container').addClass('hide');
@@ -156,7 +151,7 @@ var TodoApp = React.createClass({
                 <button className="btn positive-btn" title="Add" onClick={this.handleAdd}><i className="fa fa-plus"></i></button>
                 <div className="item-list-container">
                     <h2>Items List</h2>
-					<TodoList items={this.state.items} />
+					<TodoList items={this.state.items} onDelete={this.handleDelete}/>
 					<div className="text-right"><a className="delete-all" onClick={this.handleDeleteAll}><i className="fa fa-times"></i>Delete All</a></div>
                 </div>
                 <div className="btn-set">
