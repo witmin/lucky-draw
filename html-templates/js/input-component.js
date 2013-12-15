@@ -42,7 +42,7 @@ var Machine = function(updateCandidatesCallback, resultCallback) {
 
 var machine;
 
-var TodoList = React.createClass({
+var CandidateList = React.createClass({
   render: function() {
 	var onDelete = this.props.onDelete;
     var createItem = function(itemText) {	
@@ -52,11 +52,14 @@ var TodoList = React.createClass({
   }
 });
 
-var TodoApp = React.createClass({
+var InputForm = React.createClass({
   getInitialState: function() {
     return {items: []};
   },
   componentDidMount: function() {
+	var dom = this.refs.candidateInput.getDOMNode();
+	dom.setAttribute("x-webkit-speech");
+	
 	var reactCpn = this;
 	machine = new Machine(function(candidates) {		
 		reactCpn.setState({items: candidates});
@@ -99,7 +102,6 @@ var TodoApp = React.createClass({
                     if ($($items.get((counter) % $items.length)).prop('id') == poorMan) {
 
                         $('#winner-span').text(poorMan);
-//                        newItemsOrder[2].css('background-color', 'purple');
                         setTimeout(function() {
 
                             $('.main-container').removeClass('show animated fadeOutUp');
@@ -127,8 +129,8 @@ var TodoApp = React.createClass({
   },
   handleAdd: function(e) {
 	e.preventDefault();
-	var val = this.refs.newField.getDOMNode().value.trim();
-	this.refs.newField.getDOMNode().value = "";	
+	var val = this.refs.candidateInput.getDOMNode().value.trim();
+	this.refs.candidateInput.getDOMNode().value = "";	
 	machine.addCandidate(val);
   },
   handleDelete: function(val){
@@ -147,11 +149,11 @@ var TodoApp = React.createClass({
 		<div>
             <h1>Edit Items</h1>
             <form id="edit-item-form" onSubmit={this.handleAdd}>
-                <input type="text" placeholder="Enter item name" id="new-candidate" x-webkit-speech ref="newField"/>
+                <input type="text" placeholder="Enter item name" id="new-candidate" ref="candidateInput"/>
                 <button className="btn positive-btn" title="Add" onClick={this.handleAdd}><i className="fa fa-plus"></i></button>
                 <div className="item-list-container">
                     <h2>Items List</h2>
-					<TodoList items={this.state.items} onDelete={this.handleDelete}/>
+					<CandidateList items={this.state.items} onDelete={this.handleDelete}/>
 					<div className="text-right"><a className="delete-all" onClick={this.handleDeleteAll}><i className="fa fa-times"></i>Delete All</a></div>
                 </div>
                 <div className="btn-set">
@@ -164,5 +166,5 @@ var TodoApp = React.createClass({
 });
 
 React.renderComponent(
-  <TodoApp todos={new TodoList()} />, document.getElementById('edit-item-container')
+  <InputForm />, document.getElementById('edit-item-container')
 );
