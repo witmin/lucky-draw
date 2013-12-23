@@ -3,92 +3,84 @@
  */
 (function($, window, document) {
 
-    $(document).ready(function(){
+    var machine = new Machine(function(candidates) {
+        // Make it empty for now
+    }, function(poorMan) {
 
-        var machine = new Machine(function(candidates) {
-            // Make it empty for now
-        }, function(poorMan) {
+        // TODO convert these to React style
+        $('.main-container').removeClass('show animated fadeOutUp');
+        $('.main-container').addClass('hide');
+        $('#rolling-view-container').addClass('show animated fadeInDown');
 
-            // TODO convert these to React style
-            $('.main-container').removeClass('show animated fadeOutUp');
-            $('.main-container').addClass('hide');
-            $('#rolling-view-container').addClass('show animated fadeInDown');
+        function loopAndLoop(counter) {
+            var itemsArr = [];
+            var $items = $('.item-list li').clone().each(function(i, v){
+                itemsArr[i] = $('<li>').append($(v).text());
+            });
+            // this is not animation...
+            var $rolling = $('ul.rolling-list');
+            var newItemsOrder = itemsArr.slice((counter - 2) % $items.length).concat(itemsArr.slice(0, (counter - 2) % $items.length));
+            $rolling.empty();
+            for (var i = 0; i < newItemsOrder.length; i++) {
+                $rolling.append(newItemsOrder[i]);
+            }
 
-            function loopAndLoop(counter) {
-                var itemsArr = [];
-                var $items = $('.item-list li').clone().each(function(i, v){
-                    itemsArr[i] = $('<li>').append($(v).text());
-                });
-                // this is not animation...
-                var $rolling = $('ul.rolling-list');
-                var newItemsOrder = itemsArr.slice((counter - 2) % $items.length).concat(itemsArr.slice(0, (counter - 2) % $items.length));
-                $rolling.empty();
-                for (var i = 0; i < newItemsOrder.length; i++) {
-                    $rolling.append(newItemsOrder[i]);
-                }
+            var nextTime = 100;
+            var winHeight = $(window).height();
+            $('.rolling-list').css({
+                                       'height': winHeight-60,
+                                       'width': winHeight
+                                   });
+            $('.rolling-list li').css({
+                                          'font-size': winHeight/85 + 'em',
+                                          'margin-top': '10px'
+                                      });
+            $('.mask').css({
+                               'height': winHeight/2.6
+                           });
 
-                var nextTime = 100;
-                var winHeight = $(window).height();
-                $('.rolling-list').css({
-                                           'height': winHeight-60,
-                                           'width': winHeight
-                                       });
-                $('.rolling-list li').css({
-                                              'font-size': winHeight/85 + 'em',
-                                              'margin-top': '10px'
-                                          });
-                $('.mask').css({
-                                   'height': winHeight/2.6
-                               });
+            if (counter > $items.length) {
 
-                if (counter > $items.length) {
+                if ($($items.get((counter) % $items.length)).prop('id') == poorMan) {
 
-                    if ($($items.get((counter) % $items.length)).prop('id') == poorMan) {
-
-                        $('#winner-span').text(poorMan);
-                        setTimeout(function() {
-
-                            $('.main-container').removeClass('show animated fadeOutUp');
-                            $('.main-container').addClass('hide');
-                            $('#result-view-container').addClass('show animated fadeInDown');
-                        }, 1000);
-                        return;
-                    } else if ($($items.get((counter+1) % $items.length)).prop('id') == poorMan) {
-                        nextTime = 800;
-                    } else if ($($items.get((counter+2) % $items.length)).prop('id') == poorMan) {
-                        nextTime = 500;
-                    } else if ($($items.get((counter+3) % $items.length)).prop('id') == poorMan) {
-                        nextTime = 300;
-                    }
-                }
-                if (counter < $items.length * 2) {
-
+                    $('#winner-span').text(poorMan);
                     setTimeout(function() {
-                        loopAndLoop(++counter);
-                    }, nextTime);
+
+                        $('.main-container').removeClass('show animated fadeOutUp');
+                        $('.main-container').addClass('hide');
+                        $('#result-view-container').addClass('show animated fadeInDown');
+                    }, 1000);
+                    return;
+                } else if ($($items.get((counter+1) % $items.length)).prop('id') == poorMan) {
+                    nextTime = 800;
+                } else if ($($items.get((counter+2) % $items.length)).prop('id') == poorMan) {
+                    nextTime = 500;
+                } else if ($($items.get((counter+3) % $items.length)).prop('id') == poorMan) {
+                    nextTime = 300;
                 }
             }
-            loopAndLoop(0);
-        });
+            if (counter < $items.length * 2) {
 
-//    Page Loading Animate
-        $('.logo').addClass('animated slideInLeft');
+                setTimeout(function() {
+                    loopAndLoop(++counter);
+                }, nextTime);
+            }
+        }
+        loopAndLoop(0);
+    });
+    window.machine = machine;
+
+    $(document).ready(function(){
 
 //    Tooltip
-        $('.tooltip').hide();
         $('.tooltip-container').mouseenter(function(){
             $('.tooltip').slideDown('fast');
 
-        });
-        $('.tooltip-container').mouseleave(function(){
+        }).mouseleave(function(){
             $('.tooltip').slideUp('fast');
         });
 
 //        Toggle Views
-        $('#start-view-container').addClass('animated fadeInDown');
-        $('#edit-item-container').addClass('hide');
-        $('#rolling-view-container').addClass('hide');
-        $('#result-view-container').addClass('hide');
         $('.logo').click(function(){
             $('.main-container').removeClass('show animated fadeOutUp');
             $('.main-container').addClass('hide');
@@ -152,7 +144,7 @@
             $('#result-view-container .btn-start span.text').css({
                 'font-size': $('#result-view-container .btn-start').height()/5
             });
-        }
+        };
 
         updateStartButtonStyle();
         $(window).resize(function(){
@@ -164,8 +156,6 @@
         });
 
 //        Load Start Button View
-        $('.btn-start .text').addClass('hide animated');
-        $('.btn-start .fa-compass').addClass('show animated rotateIn');
         $('.btn-start').mouseenter(function(){
             $(this).children('.fa-compass').removeClass('show');
             $(this).children('.fa-compass').addClass('hide rotateOut');
@@ -173,6 +163,5 @@
             $(this).children('.text').addClass('show flipInX');
         });
 
-        window.machine = machine;
     });
 })(jQuery, window, document);
