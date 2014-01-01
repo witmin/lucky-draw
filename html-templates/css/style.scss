@@ -106,21 +106,28 @@ ul, ol{
   }
 }
 
-.rolling-view-container{
-  position: relative;
-  -webkit-perspective: 800;
+@-webkit-keyframes x-spin {
+  0%    { -webkit-transform: rotateX(0deg); }
+  50%   { -webkit-transform: rotateX(180deg); }
+  100%  { -webkit-transform: rotateX(360deg); }
 }
-.rolling-list{
-  overflow-y: hidden;
-  /* Ensure that we're in 3D space */
-  -webkit-transform-style: preserve-3d;
+#rolling-view-container{
+  position: relative;
+}
+.rolling-list.active {
   -webkit-animation-name: x-spin;
   -webkit-animation-duration: 2s;
+}
+.rolling-list{
+  /* Ensure that we're in 3D space */
+  -webkit-transform-style: preserve-3d;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
   li{
     line-height: 0.78;
     font-weight: bold;
-    -webkit-animation-name: y-spin;
-    -webkit-animation-duration: 3s;
+    position: absolute;
+    opacity: 0.7;
   }
 }
 //Form
