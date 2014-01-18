@@ -32,7 +32,7 @@
         for (var i = 0; i < itemsArr.length; i++) {
             var name = itemsArr[i].text();
             if (name == poorMan) {
-                finalRotation = 360 - posterAngle * i + 720;
+                finalRotation = 360 - posterAngle * i;
                 finalItem = itemsArr[i];
                 break;
             }
@@ -42,27 +42,23 @@
         $rolling.find('li').css({
             'font-size': winHeight/85 + 'em'
         });
+        $rolling.css('-webkit-transition-duration', '0s');
         $rolling.css('height', $rolling.find('li').height());
-        $rolling.css('margin-top', winHeight/2 - $rolling.height()/2);
         $('.mask').css({
             'height': winHeight/2.6
         });
 
-        $rolling.addClass("active");
+        $rolling.css('-webkit-transform', 'rotateX(' + finalRotation +'deg)');
+        $rolling.css('-webkit-transition-duration', '5s');
+        $('#winner-span').text(poorMan);
         setTimeout(function() {
-            $rolling.removeClass("active");
-            $rolling.css('-webkit-transform', 'rotateX(' + finalRotation +'deg)');
-            $rolling.css('-webkit-transition-duration', '5s');
-            $('#winner-span').text(poorMan);
-            setTimeout(function() {
-                finalItem.css('background', 'black');
-            }, 5000);
-            setTimeout(function() {
-                $('.main-container').removeClass('show animated fadeOutUp');
-                $('.main-container').addClass('hide');
-                $('#result-view-container').addClass('show animated fadeInDown');
-            }, 5500);
-        }, 4000);
+            finalItem.addClass('selected');
+        }, 5000);
+        setTimeout(function() {
+            $('.main-container').removeClass('show animated fadeOutUp');
+            $('.main-container').addClass('hide');
+            $('#result-view-container').addClass('show animated fadeInDown');
+        }, 5500);
     });
     window.machine = machine;
 
@@ -106,11 +102,9 @@
             });
 
             //Rolling List
-//            $('.rolling-list').css({
-//                'height': winHeight,
-//                'width': '100%',
-//                'overflow':'hidden'
-//            });
+            $('.rolling-list').css({
+                'margin-top': winHeight/2 - winHeight/40
+            });
 //            $('.rolling-list li').css({
 //                'font-size': winHeight/20
 //            });

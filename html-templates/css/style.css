@@ -1416,20 +1416,18 @@ ul, ol {
 #rolling-view-container {
   position: relative; }
 
-.rolling-list.active {
-  -webkit-animation-name: x-spin;
-  -webkit-animation-duration: 2s; }
-
 .rolling-list {
   /* Ensure that we're in 3D space */
   -webkit-transform-style: preserve-3d;
-  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: 2;
   -webkit-animation-timing-function: linear; }
   .rolling-list li {
     line-height: 0.78;
     font-weight: bold;
     position: absolute;
     opacity: 0.7; }
+  .rolling-list li.selected {
+    background: black; }
 
 #edit-item-form {
   width: 80%; }
