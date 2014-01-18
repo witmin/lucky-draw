@@ -149,12 +149,21 @@
             updateStartButtonStyle();
         });
 
-        $('.btn-start').bind('click', function() {
+        function go() {
             if ($('.item-list li').length > 0) {
 
                 machine.rand();
             } else {
                 showEditListView();
+            }
+        }
+
+        $('.btn-start').bind('click', function() {
+            go();
+        });
+        $('body').on('keydown', function(e) {
+            if ((e.keyCode || e.which) == 13 && $('.btn-start').is(':visible')) {
+                go();
             }
         });
 
