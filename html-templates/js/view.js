@@ -73,15 +73,23 @@
         });
 
 //        Toggle Views
-        $('.logo').click(function(){
+        function showEditListView() {
             $('.main-container').removeClass('show animated fadeOutUp');
             $('.main-container').addClass('hide');
             $('#edit-item-container').addClass('show animated fadeInDown');
+        }
+
+        $('.logo').click(function(){
+            showEditListView();
         });
-        $('#edit-item-container .btn-done').click(function(){
+        function showStartView() {
             $('.main-container').removeClass('show animated fadeOutUp');
             $('.main-container').addClass('hide');
             $('#start-view-container').addClass('show animated fadeInDown');
+        }
+
+        $('#edit-item-container .btn-done').click(function(){
+            showStartView();
         });
 
 //    Define the responsive round START button
@@ -142,7 +150,12 @@
         });
 
         $('.btn-start').bind('click', function() {
-            machine.rand();
+            if ($('.item-list li').length > 0) {
+
+                machine.rand();
+            } else {
+                showEditListView();
+            }
         });
 
 //        Load Start Button View
