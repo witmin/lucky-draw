@@ -24,6 +24,7 @@
             for (var i = 0; i < items.length; i++) {
                 var transform = 'rotateX(' + (posterAngle * i) + 'deg) translateZ(' + 400 + 'px)';
                 $rolling.append(items[i].css('-webkit-transform', transform));
+                $rolling.append(items[i].css('transform', transform));
             }
         }
 
@@ -43,6 +44,7 @@
             'font-size': winHeight/85 + 'em'
         });
         $rolling.css('-webkit-transition-duration', '0s');
+        $rolling.css('transition-duration', '0s');
         $rolling.css('height', $rolling.find('li').height());
         $('.mask').css({
             'height': winHeight/2.6
@@ -50,6 +52,8 @@
 
         $rolling.css('-webkit-transform', 'rotateX(' + finalRotation +'deg)');
         $rolling.css('-webkit-transition-duration', '5s');
+        $rolling.css('transform', 'rotateX(' + finalRotation +'deg)');
+        $rolling.css('transition-duration', '5s');
         $('#winner-span').text(poorMan);
         setTimeout(function() {
             finalItem.addClass('selected');

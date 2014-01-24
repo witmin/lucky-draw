@@ -17,7 +17,7 @@
                                           },
                                           componentDidMount: function() {
                                               var dom = this.refs.candidateInput.getDOMNode();
-                                              dom.setAttribute("x-webkit-speech");
+                                              dom.setAttribute("x-webkit-speech", "");
 
                                               var reactCpn = this;
                                               machine.registerCandidatesUpdateHandler(function(candidates) {
