@@ -67,7 +67,7 @@ echo.on('connection', function(conn) {
     });
 });
 
-var staticServer = new node_static.Server(__dirname + "/../html-templates");
+var staticServer = new node_static.Server(__dirname + "/www");
 
 var server = http.createServer(function(req, res) {
     var uri;
