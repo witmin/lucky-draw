@@ -35,13 +35,13 @@ var Machine = function(candidatesUpdateHandler, resultUpdateHandler) {
             updateResult = handler;
         },
         addCandidate: function(v) {
-            $.get('/addCandidate', {'candidate': v});
+            $.post('/addCandidate', {'candidate': v});
         },
         removeCandidate: function (v) {
-            $.get('/removeCandidate', { 'candidate': v });
+            $.post('/removeCandidate', { 'candidate': v });
         },
         clearCandidates: function() {
-            $.get('/clearCandidates');
+            $.post('/clearCandidates');
         },
         rand: function() {
             $.get('/rand');

@@ -16,44 +16,50 @@ Array.prototype.remove = function(e) {
 
 var http = require('http');
 var sockjs = require('sockjs');
-var node_static = require('node-static');
+var express = require('express');
 var url = require('url');
-var serviceManager = require('./lib/ServiceManager');
 var connectionManager = require('./lib/ConnectionManager');
+
+var app = express();
+
+app.use(express.bodyParser());
+
+app.post("/addCandidate", function(req, res) {
+    var val = req.param('candidate');
+    if(val && val !== ""){
+        candidates.push(val);
+        boardcastCandidates();
+    }
+    res.end();
+});
+
+app.post('/removeCandidate', function(req, res) {
+    var val = req.param('candidate');
+    candidates = candidates.remove(val);
+    boardcastCandidates();
+    res.end();
+});
+
+app.post('/clearCandidates', function(req, res) {
+    candidates = [];
+    boardcastCandidates();
+    res.end();
+});
+
+app.get('/rand', function(req, res) {
+    var randomNumber = Math.random();
+    connectionManager.broadcast(JSON.stringify({poorMan:
+        candidates[Math.ceil(randomNumber * candidates.length) - 1]}));
+    res.end();
+});
+
+app.use(express.static(__dirname + '/www'));
 
 var candidates = [];
 
 var boardcastCandidates = function() {
     connectionManager.broadcast(JSON.stringify({candidates: candidates}));
 };
-
-serviceManager.register('addCandidate', function(req, res, param) {
-	var val = param.candidate;
-	if(val && val !== ""){
-		candidates.push(param.candidate);
-		boardcastCandidates();
-	}
-    res.end();
-});
-
-serviceManager.register('removeCandidate', function(req, res, param) {
-    candidates = candidates.remove(param.candidate);
-    res.end();
-    boardcastCandidates();
-});
-
-serviceManager.register('clearCandidates', function(req, res) {
-    candidates = [];
-    res.end();
-    boardcastCandidates();
-});
-
-serviceManager.register('rand', function(req, res) {
-    res.end();
-    var randomNumber = Math.random();
-    connectionManager.broadcast(JSON.stringify({poorMan:
-        candidates[Math.ceil(randomNumber * candidates.length) - 1]}));
-});
 
 var echo = sockjs.createServer();
 echo.on('connection', function(conn) {
@@ -67,20 +73,7 @@ echo.on('connection', function(conn) {
     });
 });
 
-var staticServer = new node_static.Server(__dirname + "/www");
-
-var server = http.createServer(function(req, res) {
-    var uri;
-    var requestUrl = req.url;
-    var urlParts = url.parse(requestUrl, true);
-    uri = urlParts.pathname;
-    var serviceName = uri.substring(1);
-    if (serviceManager.isService(serviceName)) {
-        serviceManager.serve(serviceName, req, res, urlParts.query);
-    } else {
-        staticServer.serve(req, res);
-    }
-});
+var server = http.createServer(app);
 
 echo.installHandlers(server, {prefix:'/sock'});
 
