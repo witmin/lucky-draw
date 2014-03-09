@@ -1392,45 +1392,32 @@ ul, ol {
   .item-list .delete {
     display: none;
     float: right; }
-  .item-list li:hover {
+  .item-list li.hover {
     color: #a33024;
     background: #fae5e5;
     transition: all .3s ease-out;
     cursor: pointer; }
-    .item-list li:hover .delete {
+    .item-list li.hover .delete {
       display: inline;
       color: #a33024; }
-      .item-list li:hover .delete:hover {
+      .item-list li.hover .delete:hover {
         color: #602a25; }
 
-@-webkit-keyframes x-spin {
-  0% {
-    -webkit-transform: rotateX(0deg); }
-
-  50% {
-    -webkit-transform: rotateX(180deg); }
-
-  100% {
-    -webkit-transform: rotateX(360deg); } }
-
-#rolling-view-container {
-  position: relative; }
+.rolling-view-container {
+  position: relative;
+  -webkit-perspective: 800; }
 
 .rolling-list {
+  overflow-y: hidden;
   /* Ensure that we're in 3D space */
   -webkit-transform-style: preserve-3d;
-  -webkit-animation-iteration-count: 2;
-  -webkit-animation-timing-function: linear;
-  transform-style: preserve-3d;
-  animation-iteration-count: 2;
-  animation-timing-function: linear; }
+  -webkit-animation-name: x-spin;
+  -webkit-animation-duration: 2s; }
   .rolling-list li {
     line-height: 0.78;
     font-weight: bold;
-    position: absolute;
-    opacity: 0.7; }
-  .rolling-list li.selected {
-    background: black; }
+    -webkit-animation-name: y-spin;
+    -webkit-animation-duration: 3s; }
 
 #edit-item-form {
   width: 80%; }

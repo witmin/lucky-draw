@@ -11,58 +11,62 @@
         $('.main-container').removeClass('show animated fadeOutUp');
         $('.main-container').addClass('hide');
         $('#rolling-view-container').addClass('show animated fadeInDown');
-        var itemsArr = [];
-        var $items = $('.item-list li').clone().each(function(i, v){
-            itemsArr[i] = $('<li>').append($(v).text());
-        });
-        var posterAngle = 360 / itemsArr.length;
-        var $rolling = $('.rolling-list');
-        $rolling.empty();
-        var winHeight = $(window).height();
 
-        function circlarizeList(items) {
-            for (var i = 0; i < items.length; i++) {
-                var transform = 'rotateX(' + (posterAngle * i) + 'deg) translateZ(' + 400 + 'px)';
-                $rolling.append(items[i].css('-webkit-transform', transform));
-                $rolling.append(items[i].css('transform', transform));
+        function loopAndLoop(counter) {
+            var itemsArr = [];
+            var $items = $('.item-list li').clone().each(function(i, v){
+                itemsArr[i] = $('<li>').append($(v).text());
+            });
+            // this is not animation...
+            var $rolling = $('ul.rolling-list');
+            var newItemsOrder = itemsArr.slice((counter - 2) % $items.length).concat(itemsArr.slice(0, (counter - 2) % $items.length));
+            $rolling.empty();
+            for (var i = 0; i < newItemsOrder.length; i++) {
+                $rolling.append(newItemsOrder[i]);
+            }
+
+            var nextTime = 100;
+            var winHeight = $(window).height();
+            $('.rolling-list').css({
+                                       'height': winHeight-60,
+                                       'width': winHeight
+                                   });
+            $('.rolling-list li').css({
+                                          'font-size': winHeight/85 + 'em',
+                                          'margin-top': '10px'
+                                      });
+            $('.mask').css({
+                               'height': winHeight/2.6
+                           });
+
+            if (counter > $items.length) {
+
+                if ($($items.get((counter) % $items.length)).prop('id') == poorMan) {
+
+                    $('#winner-span').text(poorMan);
+                    setTimeout(function() {
+
+                        $('.main-container').removeClass('show animated fadeOutUp');
+                        $('.main-container').addClass('hide');
+                        $('#result-view-container').addClass('show animated fadeInDown');
+                    }, 1000);
+                    return;
+                } else if ($($items.get((counter+1) % $items.length)).prop('id') == poorMan) {
+                    nextTime = 800;
+                } else if ($($items.get((counter+2) % $items.length)).prop('id') == poorMan) {
+                    nextTime = 500;
+                } else if ($($items.get((counter+3) % $items.length)).prop('id') == poorMan) {
+                    nextTime = 300;
+                }
+            }
+            if (counter < $items.length * 2) {
+
+                setTimeout(function() {
+                    loopAndLoop(++counter);
+                }, nextTime);
             }
         }
-
-        var finalRotation = 0;
-        var finalItem = null;
-        for (var i = 0; i < itemsArr.length; i++) {
-            var name = itemsArr[i].text();
-            if (name == poorMan) {
-                finalRotation = 360 - posterAngle * i;
-                finalItem = itemsArr[i];
-                break;
-            }
-        }
-
-        circlarizeList(itemsArr);
-        $rolling.find('li').css({
-            'font-size': winHeight/85 + 'em'
-        });
-        $rolling.css('-webkit-transition-duration', '0s');
-        $rolling.css('transition-duration', '0s');
-        $rolling.css('height', $rolling.find('li').height());
-        $('.mask').css({
-            'height': winHeight/2.6
-        });
-
-        $rolling.css('-webkit-transform', 'rotateX(' + finalRotation +'deg)');
-        $rolling.css('-webkit-transition-duration', '5s');
-        $rolling.css('transform', 'rotateX(' + finalRotation +'deg)');
-        $rolling.css('transition-duration', '5s');
-        $('#winner-span').text(poorMan);
-        setTimeout(function() {
-            finalItem.addClass('selected');
-        }, 5000);
-        setTimeout(function() {
-            $('.main-container').removeClass('show animated fadeOutUp');
-            $('.main-container').addClass('hide');
-            $('#result-view-container').addClass('show animated fadeInDown');
-        }, 5500);
+        loopAndLoop(0);
     });
     window.machine = machine;
 
@@ -115,19 +119,21 @@
 
             //Rolling List
             $('.rolling-list').css({
-                'margin-top': winHeight/2 - winHeight/40
+                'height': winHeight,
+                'width': '100%',
+                'overflow':'hidden'
             });
-//            $('.rolling-list li').css({
-//                'font-size': winHeight/20
-//            });
-//            $('#mask-top').css({
-//                'height': winHeight/2.5
-//            });
-//            $('#mask-bottom').css({
-//
-//                'height':winHeight/10,
-//                'top': winHeight/1.8
-//            });
+            $('.rolling-list li').css({
+                'font-size': winHeight/20
+            });
+            $('#mask-top').css({
+                'height': winHeight/2.5
+            });
+            $('#mask-bottom').css({
+
+                'height':winHeight/10,
+                'top': winHeight/1.8
+            });
 
             //Result View
             $('.winner').css({
@@ -156,7 +162,7 @@
         function go() {
             if ($('.item-list li').length > 0) {
 
-                machine.rand();
+            machine.rand();
             } else {
                 showEditListView();
             }
