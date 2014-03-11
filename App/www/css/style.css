@@ -1392,15 +1392,15 @@ ul, ol {
   .item-list .delete {
     display: none;
     float: right; }
-  .item-list li.hover {
+  .item-list li:hover {
     color: #a33024;
     background: #fae5e5;
     transition: all .3s ease-out;
     cursor: pointer; }
-    .item-list li.hover .delete {
+    .item-list li:hover .delete {
       display: inline;
       color: #a33024; }
-      .item-list li.hover .delete:hover {
+      .item-list li:hover .delete:hover {
         color: #602a25; }
 
 .rolling-view-container {

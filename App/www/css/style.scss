@@ -90,7 +90,7 @@ ul, ol{
     float:right;
   }
   li{
-    &.hover{
+    &:hover{
       color:$primary-btn-background;
       background: $primary-color;
       transition:all .3s ease-out;
