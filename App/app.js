@@ -22,7 +22,8 @@ var connectionManager = require('./lib/ConnectionManager');
 
 var app = express();
 
-app.use(express.bodyParser());
+app.use(express.urlencoded())
+app.use(express.json())
 
 app.post("/addCandidate", function(req, res) {
     var val = req.param('candidate');
