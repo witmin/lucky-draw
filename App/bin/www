@@ -1,9 +1,21 @@
 #!/usr/bin/env node
-var debug = require('debug')('lucky-draw');
-var app = require('../app2');
+var debug = require('debug')('lucky-draw'), http = require('http'), app = require('../app'), socketIo = require('socket.io');
 
 app.set('port', process.env.PORT || 3000);
 
-var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
+server = http.createServer(app);
+
+var socketIoServer = socketIo(server);
+
+socketIoServer.on('connection', function(socket) {
+    socket.emit('news', { hello: 'world' });
+    socket.on('my other event', function(data) {
+        console.log(data);
+    });
 });
+
+
+server.listen(app.get('port'), function() {
+    debug('Express server listening on port ' + server.address().port);
+});
+
