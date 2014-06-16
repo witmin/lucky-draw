@@ -5,6 +5,8 @@
  */
 "use strict";
 
+var _ = require('lodash');
+
 var ConnectionManager = function() {
     var connections = [];
 
@@ -13,7 +15,7 @@ var ConnectionManager = function() {
             connections.push(conn);
         },
         remove: function(conn) {
-            connections.remove(conn);
+            _.remove(connections, conn);
         },
         broadcast: function(message) {
             var noOfConnection = connections.length;
