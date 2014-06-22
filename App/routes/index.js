@@ -34,8 +34,8 @@ router.post('/setWithReplacement', function(req, res) {
 });
 
 router.get('/rand', function(req, res) {
-    var randomNumber = Math.random(),
-        poorMan = candidates[Math.ceil(randomNumber * candidates.length) - 1];
+    var randomNumber = _.random(candidates.length - 1),
+        poorMan = candidates[randomNumber];
     io.emitRandResult(poorMan);
     if (isWithoutReplacement) {
         candidates = _.without(candidates, poorMan);
