@@ -1,22 +1,14 @@
 var Machine = function(candidatesUpdateHandler, resultUpdateHandler) {
     var updateCandidates = candidatesUpdateHandler;
     var updateResult = resultUpdateHandler;
-    var sockjs_url = '/sock';
-    var sockjs = new SockJS(sockjs_url);
 
-    sockjs.onopen    = function() {};
-
-    sockjs.onmessage = function(e) {
-        var obj = JSON.parse(e.data);
-        // Super lazy implementation
-        if (obj.candidates) {
-            updateCandidates(obj.candidates);
-        } else if (obj.poorMan) {
-            updateResult(obj.poorMan);
-        }
-    };
-
-    sockjs.onclose = function() {};
+    var socket = io.connect();
+    socket.on('candidates', function (data) {
+        updateCandidates(data);
+    });
+    socket.on('poorMan', function (data) {
+        updateResult(data.poorMan);
+    });
 
     function validateHandler(handler) {
         if (!handler || typeof handler != "function") {

@@ -1,8 +1,8 @@
 var express = require('express'),
     router = express.Router(),
     candidates = [],
-    connectionManager = require('../lib/ConnectionManager'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    io = require('../lib/io');
 
 router.post("/addCandidate", function(req, res) {
     var val = req.param('candidate');
@@ -15,7 +15,7 @@ router.post("/addCandidate", function(req, res) {
 
 router.post('/removeCandidate', function(req, res) {
     var val = req.param('candidate');
-    candidates = _.remove(candidates, val);
+    candidates = _.without(candidates, val);
     boardcastCandidates();
     res.end();
 });
@@ -28,13 +28,16 @@ router.post('/clearCandidates', function(req, res) {
 
 router.get('/rand', function(req, res) {
     var randomNumber = Math.random();
-    connectionManager.broadcast(JSON.stringify({poorMan:
-        candidates[Math.ceil(randomNumber * candidates.length) - 1]}));
+    io.emitRandResult(candidates[Math.ceil(randomNumber * candidates.length) - 1]);
     res.end();
 });
 
+io.on('connection', function (socket) {
+    socket.emit('candidates', candidates);
+});
+
 var boardcastCandidates = function() {
-    connectionManager.broadcast(JSON.stringify({candidates: candidates}));
+    io.emitCandidates(candidates);
 };
 
 module.exports = router;
