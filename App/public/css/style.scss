@@ -277,6 +277,10 @@ input[type="text"]{
   }
 }
 
+.float-right {
+  float: right;
+}
+
 @media only screen and (max-width: 480px) {
   .logo{
     margin-left:0;

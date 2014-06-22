@@ -1,12 +1,13 @@
 var express = require('express'),
     router = express.Router(),
     candidates = [],
+    isWithoutReplacement = false,
     _ = require('lodash'),
     io = require('../lib/io');
 
 router.post("/addCandidate", function(req, res) {
     var val = req.param('candidate');
-    if(val && val !== ""){
+    if (val && val !== "") {
         candidates.push(val);
         boardcastCandidates();
     }
@@ -26,18 +27,30 @@ router.post('/clearCandidates', function(req, res) {
     res.end();
 });
 
-router.get('/rand', function(req, res) {
-    var randomNumber = Math.random();
-    io.emitRandResult(candidates[Math.ceil(randomNumber * candidates.length) - 1]);
+router.post('/setWithReplacement', function(req, res) {
+    isWithoutReplacement = req.param('isWithoutReplacement') === "true";
+    io.emitIsWithoutReplacement(isWithoutReplacement);
     res.end();
 });
 
-io.on('connection', function (socket) {
+router.get('/rand', function(req, res) {
+    var randomNumber = Math.random(),
+        poorMan = candidates[Math.ceil(randomNumber * candidates.length) - 1];
+    io.emitRandResult(poorMan);
+    if (isWithoutReplacement) {
+        candidates = _.without(candidates, poorMan);
+        boardcastCandidates();
+    }
+    res.end();
+});
+
+io.on('connection', function(socket) {
     socket.emit('candidates', candidates);
+    socket.emit('isWithoutReplacement', isWithoutReplacement);
 });
 
 var boardcastCandidates = function() {
-    io.emitCandidates(candidates);
-};
+        io.emitCandidates(candidates);
+    };
 
 module.exports = router;

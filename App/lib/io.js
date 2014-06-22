@@ -5,12 +5,20 @@
  */
 var io = require('socket.io')();
 
+function boardcast(eventName, data) {
+    io.sockets.emit(eventName, data);
+}
+
 io.emitCandidates = function(candidates) {
-    io.sockets.emit('candidates', candidates);
+    boardcast('candidates', candidates);
 };
 
 io.emitRandResult = function(poorMan) {
-    io.sockets.emit('poorMan', {poorMan: poorMan});
+    boardcast('poorMan', {poorMan: poorMan});
+};
+
+io.emitIsWithoutReplacement = function(isWithoutReplacement) {
+    boardcast('isWithoutReplacement', isWithoutReplacement);
 };
 
 module.exports = io;

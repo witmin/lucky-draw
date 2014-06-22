@@ -3,20 +3,18 @@
  */
 (function($, window, document) {
 
-    var machine = new Machine(function(candidates) {
-        // Make it empty for now
-    }, function(poorMan) {
+    var machine = new Machine(function(poorMan) {
 
         // TODO convert these to React style
         $('.main-container').removeClass('show animated fadeOutUp');
         $('.main-container').addClass('hide');
         $('#rolling-view-container').addClass('show animated fadeInDown');
 
+        var itemsArr = [];
+        var $items = $('.item-list li').clone().each(function(i, v){
+            itemsArr[i] = $('<li>').append($(v).text());
+        });
         function loopAndLoop(counter) {
-            var itemsArr = [];
-            var $items = $('.item-list li').clone().each(function(i, v){
-                itemsArr[i] = $('<li>').append($(v).text());
-            });
             // this is not animation...
             var $rolling = $('ul.rolling-list');
             var newItemsOrder = itemsArr.slice((counter - 2) % $items.length).concat(itemsArr.slice(0, (counter - 2) % $items.length));
