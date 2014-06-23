@@ -1,6 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    candidates = [],
+    candidates = require('../conf').preloadCandidates,
     isWithoutReplacement = false,
     _ = require('lodash'),
     io = require('../lib/io');
