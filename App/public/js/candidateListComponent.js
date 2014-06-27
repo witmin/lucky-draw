@@ -72,7 +72,7 @@
                                                               </div>
                                                               <label for="rand-without-replacement" className="text-left">
                                                                   <input checked={this.state.isWithoutReplacement} onClick={this.setWithoutReplacement} type="checkbox" id="rand-without-replacement" name="without-replacement" />
-                                                                  Random without replacement
+                                                                  Draw without replacement
                                                               </label>
                                                           </div>
                                                           <div className="btn-set">
