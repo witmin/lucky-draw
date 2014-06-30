@@ -1,8 +1,8 @@
-@import "normalize.css";
-@import "col.css";
 @import "http://fonts.googleapis.com/css?family=PT+Sans:400,700";
-@import "animate.min.css";
-@import "font-awesome/font-awesome";
+@import "normalize";
+@import "col";
+@import "animate.min";
+@import "font-awesome/_font-awesome";
 
 //Variables
   //Background
@@ -149,6 +149,17 @@ input[type="text"]{
     box-shadow:inset 0 1px 1px 0 rgba(0, 0, 0, 0.3) ;
   }
 }
+input[type="checkbox"]{
+  width:16px;
+  height:16px;
+  float:left;
+  margin: 1px 5px 0 0 ;
+  & + span{
+    color: $primary-btn-background ;
+  }
+}
+
+
 .btn{
   padding:8px 15px;
 }
@@ -171,7 +182,7 @@ input[type="text"]{
 }
 
 .btn-set{
-  margin: 0 0 20px 0;
+  margin:20px 0;
   .btn{
     margin-right:20px;
   }
@@ -231,6 +242,12 @@ input[type="text"]{
   -vendor-animation-duration: .5s;
   -vendor-animation-delay: 1s;
   -vendor-animation-iteration-count: infinite;
+  width: 224px;
+  height: 91px;
+  img{
+    width: 205px;
+    height: 83px;
+  }
   :hover{
     cursor:pointer;
   }
