@@ -156,6 +156,9 @@ input[type="checkbox"]{
   margin: 1px 5px 0 0 ;
   & + span{
     color: $primary-btn-background ;
+    &:hover{
+      color: $primary-color;
+    }
   }
 }
 
