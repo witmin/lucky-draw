@@ -1,4 +1,4 @@
-Lucky-Draw
+Lucky Draw
 ==========
 
 A simple lucky draw machine.
@@ -10,4 +10,4 @@ A simple lucky draw machine.
 3. Locate to the folder "lucky-draw/App", run <code>npm start</code>
 4. Open your browser and visit <code>http://localhost:3000</code>
 
-Enjoy the lucky draw!
+Good luck :D
