@@ -93,9 +93,12 @@
                     <h1>Edit Items</h1>
                     <form id="edit-item-form" onSubmit={this.handleAdd}>
                         <input value={this.state.input} type="text" placeholder="Enter item name" id="new-candidate" onChange={this.handleChange}/>
-                        <button className="btn positive-btn" title="Add" onClick={this.handleAdd}>
-                            <i className="fa fa-plus"></i>
-                        </button>
+                        <div className={"btn-set inline-block"}>
+                            <button className="btn positive-btn" title="Add" onClick={this.handleAdd}>
+                                <i className="fa fa-plus"></i>
+                            </button>
+                            <button className={"btn positive-btn"}>Import from CSV {" "}<i className="fa fa-plus"></i></button>
+                        </div>
                         <div className="item-list-container">
                             <h2>Items List</h2>
                             <CandidateList items={this.state.items} onDelete={this.handleDelete}/>
