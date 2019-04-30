@@ -137,3 +137,5 @@ typings/
 .serverless
 
 lucky-draw.iml
+
+App/public/css/style.css
