@@ -5,7 +5,7 @@ var express = require('express'),
     _ = require('lodash'),
     io = require('../lib/io');
 
-router.post("/addCandidate", function(req, res) {
+router.post("/addCandidate", function (req, res) {
     var val = req.param('candidate');
     if (val && val !== "") {
         candidates.push(val);
@@ -14,26 +14,26 @@ router.post("/addCandidate", function(req, res) {
     res.end();
 });
 
-router.post('/removeCandidate', function(req, res) {
+router.post('/removeCandidate', function (req, res) {
     var val = req.param('candidate');
     candidates = _.without(candidates, val);
     boardcastCandidates();
     res.end();
 });
 
-router.post('/clearCandidates', function(req, res) {
+router.post('/clearCandidates', function (req, res) {
     candidates = [];
     boardcastCandidates();
     res.end();
 });
 
-router.post('/setWithReplacement', function(req, res) {
+router.post('/setWithReplacement', function (req, res) {
     isWithoutReplacement = req.param('isWithoutReplacement') === "true";
     io.emitIsWithoutReplacement(isWithoutReplacement);
     res.end();
 });
 
-router.get('/rand', function(req, res) {
+router.get('/rand', function (req, res) {
     var randomNumber = _.random(candidates.length - 1),
         poorMan = candidates[randomNumber];
     io.emitRandResult(poorMan);
@@ -44,13 +44,20 @@ router.get('/rand', function(req, res) {
     res.end();
 });
 
-io.on('connection', function(socket) {
+router.get('/configs', (req, res) => {
+    res.json({
+        candidates,
+        isWithoutReplacement
+    });
+});
+
+io.on('connection', function (socket) {
     socket.emit('candidates', candidates);
     socket.emit('isWithoutReplacement', isWithoutReplacement);
 });
 
-var boardcastCandidates = function() {
-        io.emitCandidates(candidates);
-    };
+var boardcastCandidates = function () {
+    io.emitCandidates(candidates);
+};
 
 module.exports = router;

@@ -68,6 +68,15 @@
     });
     window.machine = machine;
 
+//        Toggle Views
+    function showEditListView() {
+        $('.main-container').removeClass('show animated fadeOutUp');
+        $('.main-container').addClass('hide');
+        $('#edit-item-container').addClass('show animated fadeInDown');
+    }
+
+    window.showEditListView = showEditListView;
+
     $(document).ready(function(){
 
 //    Tooltip
@@ -78,12 +87,6 @@
             $('.tooltip').slideUp('fast');
         });
 
-//        Toggle Views
-        function showEditListView() {
-            $('.main-container').removeClass('show animated fadeOutUp');
-            $('.main-container').addClass('hide');
-            $('#edit-item-container').addClass('show animated fadeInDown');
-        }
 
         $('.logo').click(function(){
             showEditListView();
@@ -160,7 +163,7 @@
         function go() {
             if ($('.item-list li').length > 0) {
 
-            machine.rand();
+                machine.rand();
             } else {
                 showEditListView();
             }
