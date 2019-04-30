@@ -10,6 +10,7 @@ Demo on Vimeo: [Watch](https://vimeo.com/103432954)
 - Support viewing the machine working from multiple devices at the same time
 - Support mobile display and control
 - Christmas theme
+- Import Candidate List from CSV.
 
 ## How to install Lucky Draw?
 
