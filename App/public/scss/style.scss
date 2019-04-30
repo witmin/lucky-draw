@@ -3,6 +3,7 @@
 @import "col";
 @import "animate.min";
 @import "font-awesome/_font-awesome";
+@import "spinner";
 
 //Variables
 //Background
@@ -123,6 +124,26 @@ ul, ol {
 .rolling-view-container {
   position: relative;
   -webkit-perspective: 800;
+}
+
+#rolling-view-container {
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: none;
+
+  &.hide {
+    display: none;
+  }
+
+  &.show {
+
+    display: flex;
+  }
+
 }
 
 .rolling-list {
