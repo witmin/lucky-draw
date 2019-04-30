@@ -17,6 +17,55 @@
         }
     }
 
+    const ImportButton = () => {
+
+        function processData(allText) {
+            var allTextLines = allText.split(/\r\n|\n/);
+            var headers = allTextLines[0].split(',');
+            var lines = [];
+
+            for (var i = 1; i < allTextLines.length; i++) {
+                var data = allTextLines[i].split(',');
+                if (data.length === headers.length) {
+
+                    var tarr = [];
+                    for (var j = 0; j < headers.length; j++) {
+                        tarr.push(data[j]);
+                    }
+                    lines.push(tarr);
+                }
+            }
+            return {headers, lines};
+        }
+
+        const onFileChange = (e) => {
+
+            const files = e.target.files;
+
+            console.log(files);
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = function (e) {
+                const content = e.target.result;
+                const data = processData(content);
+                data.lines.forEach((line) => {
+                    machine.addCandidate(line.join('\t'));
+                });
+            };
+
+            reader.readAsText(files[0]);
+        };
+
+        return (
+            <label className={"btn positive-btn"} htmlFor={"file-input"}>
+                Import from CSV {" "}<i className="fa fa-plus"></i>
+                <input type={"file"} style={{display: 'none'}} id={"file-input"} onChange={onFileChange}/>
+            </label>
+        )
+    };
+
     class InputForm extends React.Component {
 
         constructor(props) {
@@ -97,7 +146,7 @@
                             <button className="btn positive-btn" title="Add" onClick={this.handleAdd}>
                                 <i className="fa fa-plus"></i>
                             </button>
-                            <button className={"btn positive-btn"}>Import from CSV {" "}<i className="fa fa-plus"></i></button>
+                            <ImportButton/>
                         </div>
                         <div className="item-list-container">
                             <h2>Items List</h2>
