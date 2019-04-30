@@ -10,63 +10,24 @@
         $('.main-container').addClass('hide');
         $('#rolling-view-container').addClass('show animated fadeInDown');
 
-        var itemsArr = [];
-        var $items = $('.item-list li').clone().each(function(i, v){
-            itemsArr[i] = $('<li>').append($(v).text());
-        });
-        function loopAndLoop(counter) {
-            // this is not animation...
-            var $rolling = $('ul.rolling-list');
-            var newItemsOrder = itemsArr.slice((counter - 2) % $items.length).concat(itemsArr.slice(0, (counter - 2) % $items.length));
-            $rolling.empty();
-            for (var i = 0; i < newItemsOrder.length; i++) {
-                $rolling.append(newItemsOrder[i]);
-            }
+        $('#winner-span').text(poorMan);
+        setTimeout(function() {
 
-            var nextTime = 100;
-            var winHeight = $(window).height();
-            $('.rolling-list').css({
-                                       'height': winHeight-60,
-                                       'width': winHeight
-                                   });
-            $('.rolling-list li').css({
-                                          'font-size': winHeight/85 + 'em',
-                                          'margin-top': '10px'
-                                      });
-            $('.mask').css({
-                               'height': winHeight/2.6
-                           });
-
-            if (counter > $items.length) {
-
-                if ($($items.get((counter) % $items.length)).prop('id') == poorMan) {
-
-                    $('#winner-span').text(poorMan);
-                    setTimeout(function() {
-
-                        $('.main-container').removeClass('show animated fadeOutUp');
-                        $('.main-container').addClass('hide');
-                        $('#result-view-container').addClass('show animated fadeInDown');
-                    }, 1000);
-                    return;
-                } else if ($($items.get((counter+1) % $items.length)).prop('id') == poorMan) {
-                    nextTime = 800;
-                } else if ($($items.get((counter+2) % $items.length)).prop('id') == poorMan) {
-                    nextTime = 500;
-                } else if ($($items.get((counter+3) % $items.length)).prop('id') == poorMan) {
-                    nextTime = 300;
-                }
-            }
-            if (counter < $items.length * 2) {
-
-                setTimeout(function() {
-                    loopAndLoop(++counter);
-                }, nextTime);
-            }
-        }
-        loopAndLoop(0);
+            $('.main-container').removeClass('show animated fadeOutUp');
+            $('.main-container').addClass('hide');
+            $('#result-view-container').addClass('show animated fadeInDown');
+        }, 1000);
     });
     window.machine = machine;
+
+//        Toggle Views
+    function showEditListView() {
+        $('.main-container').removeClass('show animated fadeOutUp');
+        $('.main-container').addClass('hide');
+        $('#edit-item-container').addClass('show animated fadeInDown');
+    }
+
+    window.showEditListView = showEditListView;
 
     $(document).ready(function(){
 
@@ -78,12 +39,6 @@
             $('.tooltip').slideUp('fast');
         });
 
-//        Toggle Views
-        function showEditListView() {
-            $('.main-container').removeClass('show animated fadeOutUp');
-            $('.main-container').addClass('hide');
-            $('#edit-item-container').addClass('show animated fadeInDown');
-        }
 
         $('.logo').click(function(){
             showEditListView();
@@ -160,7 +115,7 @@
         function go() {
             if ($('.item-list li').length > 0) {
 
-            machine.rand();
+                machine.rand();
             } else {
                 showEditListView();
             }

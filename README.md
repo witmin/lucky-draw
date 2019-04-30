@@ -5,13 +5,13 @@ A simple lucky draw machine.
 
 Demo on Vimeo: [Watch](https://vimeo.com/103432954)
 
-##Feature
+## Feature
 
 - Support viewing the machine working from multiple devices at the same time
 - Support mobile display and control
 - Christmas theme
 
-##How to install Lucky Draw?
+## How to install Lucky Draw?
 
 1. Install Node.js: http://nodejs.org/
 2. Locate to the folder "lucky-draw/App" and execute the command: 
