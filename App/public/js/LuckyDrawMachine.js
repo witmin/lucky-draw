@@ -7,6 +7,9 @@
             },
             updateIsWithoutReplacement = function() {
 
+            },
+            updateNumberOfDraws = function() {
+
             };
 
         var socket = io.connect();
@@ -18,6 +21,9 @@
         });
         socket.on('isWithoutReplacement', function(data) {
             updateIsWithoutReplacement(data);
+        });
+        socket.on('numberOfDraws', function(data) {
+            updateNumberOfDraws(data);
         });
 
         function validateHandler(handler) {
@@ -36,6 +42,10 @@
                 validateHandler(handler);
                 updateIsWithoutReplacement = handler;
             },
+            registerUpdateNumberOfDrawHandler: function(handler) {
+                validateHandler(handler);
+                updateNumberOfDraws = handler;
+            },
             addCandidate: function(v) {
                 $.post('/addCandidate', {'candidate': v});
             },
@@ -50,6 +60,9 @@
             },
             setWithoutReplacement: function(isWithoutReplacement) {
                 $.post('/setWithReplacement', {isWithoutReplacement: isWithoutReplacement});
+            },
+            setNumberOfDraws: function(numberOfDraws) {
+                $.post("/setNumberOfDraws", {numberOfDraws: +numberOfDraws})
             }
         }
     };
