@@ -11,6 +11,8 @@ Demo on Vimeo: [Watch](https://vimeo.com/103432954)
 - Support mobile display and control
 - Christmas theme
 - Import Candidate List from CSV.
+- Draw multiple result at once.
+- Download result as txt file.
 
 ## How to install Lucky Draw?
 

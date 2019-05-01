@@ -23,6 +23,10 @@
                 class: "fa fa-trophy"
             })).append($("<span>").text(man)));
         });
+        $('#save-result').off('click.save').on('click.save', () => {
+            let blob = new Blob([poorMan.join('\n')], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, "result.txt");
+        });
         setTimeout(function () {
 
             $('.main-container').removeClass('show animated fadeOutUp');
