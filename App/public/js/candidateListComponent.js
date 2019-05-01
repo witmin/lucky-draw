@@ -71,11 +71,13 @@
         constructor(props) {
             super(props);
             this.handleAdd = this.handleAdd.bind(this);
-            this.handleChange = this.handleChange.bind(this);
+            // this.handleChange = this.handleChange.bind(this);
+            this.handleChangeNumberOfDraws = this.handleChangeNumberOfDraws.bind(this);
             this.state = {
                 items: [],
                 input: "",
-                isWithoutReplacement: false
+                isWithoutReplacement: false,
+                nDraws: 1
             }
         }
 
@@ -86,7 +88,8 @@
                 .then((result) => {
                     this.setState({
                         items: result.candidates,
-                        isWithoutReplacement: result.isWithoutReplacement
+                        isWithoutReplacement: result.isWithoutReplacement,
+                        nDraws: result.numberOfDraws
                     }, () => {
                         if (result.candidates.length > 0) {
                             window.showEditListView();
@@ -94,16 +97,37 @@
                     })
                 });
             machine.registerCandidatesUpdateHandler(function (candidates) {
-                reactCpn.setState({items: candidates});
+                reactCpn.setState({
+                    items: candidates
+                });
             });
             machine.registerUpdateIsWithoutReplacementHandler(function (isWithoutReplacement) {
                 reactCpn.setState({isWithoutReplacement: isWithoutReplacement});
             });
+            machine.registerUpdateNumberOfDrawHandler(function (numberOfDraws) {
+                reactCpn.setState({
+                    nDraws: numberOfDraws
+                });
+            });
         }
 
-        handleChange(e) {
+        handleChange(name) {
+            return (e) => {
+                this.setState({
+                    [name]: e.target.value
+                })
+            }
+        }
+
+        handleChangeNumberOfDraws(e) {
+            const v = e.target.value;
             this.setState({
-                input: e.target.value
+                nDraws: v
+            }, () => {
+                if (!isNaN(v)) {
+
+                    machine.setNumberOfDraws(v)
+                }
             })
         }
 
@@ -141,7 +165,8 @@
                 <div>
                     <h1>Edit Items</h1>
                     <form id="edit-item-form" onSubmit={this.handleAdd}>
-                        <input value={this.state.input} type="text" placeholder="Enter item name" id="new-candidate" onChange={this.handleChange}/>
+                        <input value={this.state.input} type="text" placeholder="Enter item name" id="new-candidate"
+                               onChange={this.handleChange('input')}/>
                         <div className={"btn-set inline-block"}>
                             <button className="btn positive-btn" title="Add" onClick={this.handleAdd}>
                                 <i className="fa fa-plus"></i>
@@ -157,8 +182,13 @@
                                     Delete All
                                 </a>
                             </div>
+                            <div style={{marginBottom: 5}}>
+                                <label className={"block"}>Number Of Draws per batch</label>
+                                <input value={this.state.nDraws} type="number" placeholder="Number Of Draws" id="number-of-draws"
+                                       onChange={this.handleChangeNumberOfDraws} min={1} max={Math.max(this.state.items.length, 1)}/>
+                            </div>
                             <label htmlFor="rand-without-replacement" className="text-left">
-                                <input checked={this.state.isWithoutReplacement} onChange={this.setWithoutReplacement} type="checkbox"
+                                <input checked={!!this.state.isWithoutReplacement} onChange={this.setWithoutReplacement} type="checkbox"
                                        id="rand-without-replacement" name="without-replacement"/>
                                 Draw without replacement
                             </label>

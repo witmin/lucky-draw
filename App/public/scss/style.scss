@@ -169,7 +169,7 @@ ul, ol {
   }
 }
 
-input[type="text"], .btn {
+input[type="text"], input[type="number"], .btn {
   padding: 8px 10px;
   font-size: .9em;
   margin: 0;
@@ -179,7 +179,7 @@ input[type="text"], .btn {
   outline: none;
 }
 
-input[type="text"] {
+input[type="text"], input[type="number"] {
   width: 50%;
 
   &:hover {
@@ -383,4 +383,8 @@ input[type="checkbox"] {
 
 .inline-block {
   display: inline-block;
+}
+
+.block {
+  display: block;
 }

@@ -21,4 +21,8 @@ io.emitIsWithoutReplacement = function(isWithoutReplacement) {
     boardcast('isWithoutReplacement', isWithoutReplacement);
 };
 
+io.emitNumberOfDraws = (numberOfDraws) => {
+    boardcast("numberOfDraws", numberOfDraws);
+};
+
 module.exports = io;

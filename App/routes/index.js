@@ -2,14 +2,24 @@ var express = require('express'),
     router = express.Router(),
     candidates = require('../conf').preloadCandidates,
     isWithoutReplacement = false,
+    numberOfDraws = 1,
     _ = require('lodash'),
     io = require('../lib/io');
+
+function deriveNumberOfDrawsAndEmit() {
+    const newNDraws = Math.max(1, Math.min(candidates.length, numberOfDraws));
+    if (newNDraws !== numberOfDraws) {
+        numberOfDraws = newNDraws;
+        io.emitNumberOfDraws(numberOfDraws);
+    }
+}
 
 router.post("/addCandidate", function (req, res) {
     var val = req.param('candidate');
     if (val && val !== "") {
         candidates.push(val);
         boardcastCandidates();
+        deriveNumberOfDrawsAndEmit();
     }
     res.end();
 });
@@ -18,12 +28,14 @@ router.post('/removeCandidate', function (req, res) {
     var val = req.param('candidate');
     candidates = _.without(candidates, val);
     boardcastCandidates();
+    deriveNumberOfDrawsAndEmit();
     res.end();
 });
 
 router.post('/clearCandidates', function (req, res) {
     candidates = [];
     boardcastCandidates();
+    deriveNumberOfDrawsAndEmit();
     res.end();
 });
 
@@ -33,12 +45,27 @@ router.post('/setWithReplacement', function (req, res) {
     res.end();
 });
 
+router.post('/setNumberOfDraws', function (req, res) {
+    numberOfDraws = +req.param('numberOfDraws');
+    io.emitNumberOfDraws(numberOfDraws);
+    res.end();
+});
+
 router.get('/rand', function (req, res) {
-    var randomNumber = _.random(candidates.length - 1),
-        poorMan = candidates[randomNumber];
-    io.emitRandResult(poorMan);
+    const result = [];
+    for (let i = 0; i < numberOfDraws; i++) {
+
+        var randomNumber = _.random(candidates.length - 1),
+            poorMan = candidates[randomNumber];
+        result.push(poorMan);
+        if (isWithoutReplacement) {
+            candidates = _.without(candidates, poorMan);
+        }
+    }
+
+    io.emitRandResult(result);
     if (isWithoutReplacement) {
-        candidates = _.without(candidates, poorMan);
+
         boardcastCandidates();
     }
     res.end();
@@ -47,7 +74,8 @@ router.get('/rand', function (req, res) {
 router.get('/configs', (req, res) => {
     res.json({
         candidates,
-        isWithoutReplacement
+        isWithoutReplacement,
+        numberOfDraws
     });
 });
 
