@@ -1,35 +1,28 @@
 (function ($, document, machine) {
 
-    class CandidateList extends React.Component {
+    const Item = ({text, onDelete}) => (
+        <li key={Math.random()} id={text}>{text}
+            <span className="delete" title="Delete" onClick={() => onDelete(text)}><i className="fa fa-minus-circle"/></span>
+        </li>);
 
-        render() {
+    const CandidateList = ({items, onDelete}) => {
 
-            var onDelete = this.props.onDelete;
-            var createItem = function (itemText) {
-                return <li key={Math.random()} id={itemText}>{itemText}
-                    <span className="delete" title="Delete" onClick={onDelete.bind(this,
-                        itemText)}>
-                                                              <i className="fa fa-minus-circle"></i>
-                                                          </span>
-                </li>
-            };
-            return <ul className="item-list">{this.props.items.map(createItem)}</ul>;
-        }
-    }
+        return <ul className="item-list">{items.map((itemText, i) => <Item text={itemText} key={i} onDelete={onDelete}/>)}</ul>;
+    };
 
     const ImportButton = () => {
 
         function processData(allText) {
-            var allTextLines = allText.split(/\r\n|\n/);
-            var headers = allTextLines[0].split(',');
-            var lines = [];
+            const allTextLines = allText.split(/\r\n|\n/);
+            const headers = allTextLines[0].split(',');
+            const lines = [];
 
-            for (var i = 1; i < allTextLines.length; i++) {
-                var data = allTextLines[i].split(',');
+            for (let i = 1; i < allTextLines.length; i++) {
+                const data = allTextLines[i].split(',');
                 if (data.length === headers.length) {
 
-                    var tarr = [];
-                    for (var j = 0; j < headers.length; j++) {
+                    const tarr = [];
+                    for (let j = 0; j < headers.length; j++) {
                         tarr.push(data[j]);
                     }
                     lines.push(tarr);
@@ -44,7 +37,7 @@
 
             console.log(files);
 
-            var reader = new FileReader();
+            const reader = new FileReader();
 
             // Closure to capture the file information.
             reader.onload = function (e) {
@@ -60,7 +53,7 @@
 
         return (
             <label className={"btn positive-btn"} htmlFor={"file-input"}>
-                Import from CSV {" "}<i className="fa fa-plus"></i>
+                Import from CSV {" "}<i className="fa fa-plus"/>
                 <input type={"file"} style={{display: 'none'}} id={"file-input"} onChange={onFileChange}/>
             </label>
         )
@@ -82,7 +75,7 @@
         }
 
         componentDidMount() {
-            var reactCpn = this;
+            const reactCpn = this;
             fetch("/configs")
                 .then((res) => res.json())
                 .then((result) => {
