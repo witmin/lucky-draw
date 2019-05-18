@@ -17,12 +17,8 @@ io.emitRandResult = function(poorMan) {
     boardcast('poorMan', {poorMan: poorMan});
 };
 
-io.emitIsWithoutReplacement = function(isWithoutReplacement) {
-    boardcast('isWithoutReplacement', isWithoutReplacement);
-};
-
-io.emitNumberOfDraws = (numberOfDraws) => {
-    boardcast("numberOfDraws", numberOfDraws);
+io.emitSettings = (settings) => {
+    boardcast("settings", settings);
 };
 
 module.exports = io;

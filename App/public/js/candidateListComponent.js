@@ -1,35 +1,28 @@
 (function ($, document, machine) {
 
-    class CandidateList extends React.Component {
+    const Item = ({text, onDelete}) => (
+        <li key={Math.random()} id={text}>{text}
+            <span className="delete" title="Delete" onClick={() => onDelete(text)}><i className="fa fa-minus-circle"/></span>
+        </li>);
 
-        render() {
+    const CandidateList = ({items, onDelete}) => {
 
-            var onDelete = this.props.onDelete;
-            var createItem = function (itemText) {
-                return <li key={Math.random()} id={itemText}>{itemText}
-                    <span className="delete" title="Delete" onClick={onDelete.bind(this,
-                        itemText)}>
-                                                              <i className="fa fa-minus-circle"></i>
-                                                          </span>
-                </li>
-            };
-            return <ul className="item-list">{this.props.items.map(createItem)}</ul>;
-        }
-    }
+        return <ul className="item-list">{items.map((itemText, i) => <Item text={itemText} key={i} onDelete={onDelete}/>)}</ul>;
+    };
 
     const ImportButton = () => {
 
         function processData(allText) {
-            var allTextLines = allText.split(/\r\n|\n/);
-            var headers = allTextLines[0].split(',');
-            var lines = [];
+            const allTextLines = allText.split(/\r\n|\n/);
+            const headers = allTextLines[0].split(',');
+            const lines = [];
 
-            for (var i = 1; i < allTextLines.length; i++) {
-                var data = allTextLines[i].split(',');
+            for (let i = 1; i < allTextLines.length; i++) {
+                const data = allTextLines[i].split(',');
                 if (data.length === headers.length) {
 
-                    var tarr = [];
-                    for (var j = 0; j < headers.length; j++) {
+                    const tarr = [];
+                    for (let j = 0; j < headers.length; j++) {
                         tarr.push(data[j]);
                     }
                     lines.push(tarr);
@@ -44,7 +37,7 @@
 
             console.log(files);
 
-            var reader = new FileReader();
+            const reader = new FileReader();
 
             // Closure to capture the file information.
             reader.onload = function (e) {
@@ -60,7 +53,7 @@
 
         return (
             <label className={"btn positive-btn"} htmlFor={"file-input"}>
-                Import from CSV {" "}<i className="fa fa-plus"></i>
+                Import from CSV {" "}<i className="fa fa-plus"/>
                 <input type={"file"} style={{display: 'none'}} id={"file-input"} onChange={onFileChange}/>
             </label>
         )
@@ -71,42 +64,72 @@
         constructor(props) {
             super(props);
             this.handleAdd = this.handleAdd.bind(this);
-            // this.handleChange = this.handleChange.bind(this);
             this.handleChangeNumberOfDraws = this.handleChangeNumberOfDraws.bind(this);
+            this.handleChangeFontSize = this.handleChangeFontSize.bind(this);
             this.state = {
                 items: [],
                 input: "",
                 isWithoutReplacement: false,
-                nDraws: 1
+                numberOfDraws: 1,
+                fontSize: 24
             }
         }
 
         componentDidMount() {
-            var reactCpn = this;
             fetch("/configs")
                 .then((res) => res.json())
                 .then((result) => {
                     this.setState({
                         items: result.candidates,
                         isWithoutReplacement: result.isWithoutReplacement,
-                        nDraws: result.numberOfDraws
+                        numberOfDraws: result.numberOfDraws,
+                        fontSize: result.fontSize
                     }, () => {
                         if (result.candidates.length > 0) {
                             window.showEditListView();
                         }
+                        machine.onResultChange((poorMan) => {
+
+                            // TODO convert these to React style
+                            $('.main-container').removeClass('show animated fadeOutUp');
+                            $('.main-container').addClass('hide');
+                            $('#rolling-view-container').addClass('show animated fadeInDown');
+
+                            const container = $('#winner-container').empty();
+                            poorMan.forEach((man) => {
+                                container.append($("<h1>", {
+                                    class: "winner",
+                                    css: {
+                                        'font-size': this.state.fontSize + 'px'
+                                    }
+                                }).append($("<span>", {
+                                    class: "fa fa-trophy"
+                                })).append($("<span>").text(man)));
+                            });
+                            $('#save-result').off('click.save').on('click.save', () => {
+                                let blob = new Blob([poorMan.join('\n')], {type: "text/plain;charset=utf-8"});
+                                saveAs(blob, "result.txt");
+                            });
+                            setTimeout(function () {
+
+                                $('.main-container').removeClass('show animated fadeOutUp');
+                                $('.main-container').addClass('hide');
+                                $('#result-view-container').addClass('show animated fadeInDown');
+                            }, 1000);
+                        });
                     })
                 });
-            machine.registerCandidatesUpdateHandler(function (candidates) {
-                reactCpn.setState({
-                    items: candidates
+
+            machine.onSettingChange((settings) => {
+
+                this.setState({
+                    ...settings
                 });
             });
-            machine.registerUpdateIsWithoutReplacementHandler(function (isWithoutReplacement) {
-                reactCpn.setState({isWithoutReplacement: isWithoutReplacement});
-            });
-            machine.registerUpdateNumberOfDrawHandler(function (numberOfDraws) {
-                reactCpn.setState({
-                    nDraws: numberOfDraws
+
+            machine.registerCandidatesUpdateHandler((candidates) => {
+                this.setState({
+                    items: candidates
                 });
             });
         }
@@ -122,11 +145,23 @@
         handleChangeNumberOfDraws(e) {
             const v = e.target.value;
             this.setState({
-                nDraws: v
+                numberOfDraws: v
             }, () => {
                 if (!isNaN(v)) {
 
-                    machine.setNumberOfDraws(v)
+                    machine.setSettings({numberOfDraws: +v});
+                }
+            })
+        }
+
+        handleChangeFontSize(e) {
+            const v = e.target.value;
+            this.setState({
+                fontSize: v
+            }, () => {
+                if (!isNaN(v)) {
+
+                    machine.setSettings({fontSize: +v});
                 }
             })
         }
@@ -156,7 +191,7 @@
         }
 
         setWithoutReplacement() {
-            machine.setWithoutReplacement($('#rand-without-replacement').is(':checked'));
+            machine.setSettings({isWithoutReplacement: $('#rand-without-replacement').is(':checked')});
         }
 
         render() {
@@ -184,8 +219,13 @@
                             </div>
                             <div style={{marginBottom: 5}}>
                                 <label className={"block"}>Number Of Draws per batch</label>
-                                <input value={this.state.nDraws} type="number" placeholder="Number Of Draws" id="number-of-draws"
+                                <input value={this.state.numberOfDraws} type="number" placeholder="Number Of Draws" id="number-of-draws"
                                        onChange={this.handleChangeNumberOfDraws} min={1} max={Math.max(this.state.items.length, 1)}/>
+                            </div>
+                            <div style={{marginBottom: 5}}>
+                                <label className={"block"}>Font Size (in pixel)</label>
+                                <input value={this.state.fontSize} type="number" placeholder="Font Size (in pixel)" id="font-size"
+                                       onChange={this.handleChangeFontSize} />
                             </div>
                             <label htmlFor="rand-without-replacement" className="text-left">
                                 <input checked={!!this.state.isWithoutReplacement} onChange={this.setWithoutReplacement} type="checkbox"

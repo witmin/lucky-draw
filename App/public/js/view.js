@@ -3,38 +3,7 @@
  */
 (function ($, window, document) {
 
-    var machine = new Machine(function (poorMan) {
-
-        // TODO convert these to React style
-        $('.main-container').removeClass('show animated fadeOutUp');
-        $('.main-container').addClass('hide');
-        $('#rolling-view-container').addClass('show animated fadeInDown');
-
-        // $('#winner-span').text(poorMan.join(', '));
-
-        const container = $('#winner-container').empty();
-        poorMan.forEach((man) => {
-            container.append($("<h1>", {
-                class: "winner",
-                css: {
-                    'font-size': $(window).height() / 100 + 'em'
-                }
-            }).append($("<span>", {
-                class: "fa fa-trophy"
-            })).append($("<span>").text(man)));
-        });
-        $('#save-result').off('click.save').on('click.save', () => {
-            let blob = new Blob([poorMan.join('\n')], {type: "text/plain;charset=utf-8"});
-            saveAs(blob, "result.txt");
-        });
-        setTimeout(function () {
-
-            $('.main-container').removeClass('show animated fadeOutUp');
-            $('.main-container').addClass('hide');
-            $('#result-view-container').addClass('show animated fadeInDown');
-        }, 1000);
-    });
-    window.machine = machine;
+    window.machine = new Machine();
 
 //        Toggle Views
     function showEditListView() {
