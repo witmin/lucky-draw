@@ -44,6 +44,10 @@
                 validateHandler(handler);
                 updateCandidates = handler;
             },
+            onResultChange: (handler) => {
+                validateHandler(handler);
+                updateResult = handler;
+            },
             onSettingChange: (handler) => {
                 validateHandler(handler);
                 updateSettings = handler;

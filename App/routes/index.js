@@ -3,13 +3,14 @@ const express = require('express'),
 const _ = require('lodash'),
     io = require('../lib/io');
 
-const settingList = ["isWithoutReplacement", "numberOfDraws"];
+const settingList = ["isWithoutReplacement", "numberOfDraws", "fontSize"];
 
 let candidates = require('../conf').preloadCandidates;
 
 let settings = {
     isWithoutReplacement: false,
-    numberOfDraws: 1
+    numberOfDraws: 1,
+    fontSize: 24
 };
 
 function deriveNumberOfDrawsAndEmit() {

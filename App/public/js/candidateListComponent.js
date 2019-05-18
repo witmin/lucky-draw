@@ -65,11 +65,13 @@
             super(props);
             this.handleAdd = this.handleAdd.bind(this);
             this.handleChangeNumberOfDraws = this.handleChangeNumberOfDraws.bind(this);
+            this.handleChangeFontSize = this.handleChangeFontSize.bind(this);
             this.state = {
                 items: [],
                 input: "",
                 isWithoutReplacement: false,
-                numberOfDraws: 1
+                numberOfDraws: 1,
+                fontSize: 24
             }
         }
 
@@ -80,11 +82,41 @@
                     this.setState({
                         items: result.candidates,
                         isWithoutReplacement: result.isWithoutReplacement,
-                        numberOfDraws: result.numberOfDraws
+                        numberOfDraws: result.numberOfDraws,
+                        fontSize: result.fontSize
                     }, () => {
                         if (result.candidates.length > 0) {
                             window.showEditListView();
                         }
+                        machine.onResultChange((poorMan) => {
+
+                            // TODO convert these to React style
+                            $('.main-container').removeClass('show animated fadeOutUp');
+                            $('.main-container').addClass('hide');
+                            $('#rolling-view-container').addClass('show animated fadeInDown');
+
+                            const container = $('#winner-container').empty();
+                            poorMan.forEach((man) => {
+                                container.append($("<h1>", {
+                                    class: "winner",
+                                    css: {
+                                        'font-size': this.state.fontSize + 'px'
+                                    }
+                                }).append($("<span>", {
+                                    class: "fa fa-trophy"
+                                })).append($("<span>").text(man)));
+                            });
+                            $('#save-result').off('click.save').on('click.save', () => {
+                                let blob = new Blob([poorMan.join('\n')], {type: "text/plain;charset=utf-8"});
+                                saveAs(blob, "result.txt");
+                            });
+                            setTimeout(function () {
+
+                                $('.main-container').removeClass('show animated fadeOutUp');
+                                $('.main-container').addClass('hide');
+                                $('#result-view-container').addClass('show animated fadeInDown');
+                            }, 1000);
+                        });
                     })
                 });
 
@@ -117,7 +149,19 @@
             }, () => {
                 if (!isNaN(v)) {
 
-                    machine.setSettings({numberOfDraws: v});
+                    machine.setSettings({numberOfDraws: +v});
+                }
+            })
+        }
+
+        handleChangeFontSize(e) {
+            const v = e.target.value;
+            this.setState({
+                fontSize: v
+            }, () => {
+                if (!isNaN(v)) {
+
+                    machine.setSettings({fontSize: +v});
                 }
             })
         }
@@ -177,6 +221,11 @@
                                 <label className={"block"}>Number Of Draws per batch</label>
                                 <input value={this.state.numberOfDraws} type="number" placeholder="Number Of Draws" id="number-of-draws"
                                        onChange={this.handleChangeNumberOfDraws} min={1} max={Math.max(this.state.items.length, 1)}/>
+                            </div>
+                            <div style={{marginBottom: 5}}>
+                                <label className={"block"}>Font Size (in pixel)</label>
+                                <input value={this.state.fontSize} type="number" placeholder="Font Size (in pixel)" id="font-size"
+                                       onChange={this.handleChangeFontSize} />
                             </div>
                             <label htmlFor="rand-without-replacement" className="text-left">
                                 <input checked={!!this.state.isWithoutReplacement} onChange={this.setWithoutReplacement} type="checkbox"
