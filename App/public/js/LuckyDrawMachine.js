@@ -29,7 +29,6 @@
         });
         socket.on('settings', (data) => {
             updateSettings(data);
-            console.log(data);
         });
 
         function validateHandler(handler) {
