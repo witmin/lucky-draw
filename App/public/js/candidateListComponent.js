@@ -93,28 +93,36 @@
                             // TODO convert these to React style
                             $('.main-container').removeClass('show animated fadeOutUp');
                             $('.main-container').addClass('hide');
-                            $('#rolling-view-container').addClass('show animated fadeInDown');
+                            $('#result-view-container').addClass('show animated fadeInDown');
 
                             const container = $('#winner-container').empty();
-                            poorMan.forEach((man) => {
+                            poorMan.forEach(() => {
                                 container.append($("<h1>", {
-                                    class: "winner",
+                                    class: "winner masked",
                                     css: {
-                                        'font-size': this.state.fontSize + 'px'
+                                        'font-size': this.state.fontSize + 'px',
+                                        'min-height': this.state.fontSize
                                     }
-                                }).append($("<span>", {
-                                    class: "fa fa-trophy"
-                                })).append($("<span>").text(man)));
+                                }));
                             });
                             $('#save-result').off('click.save').on('click.save', () => {
                                 let blob = new Blob([poorMan.join('\n')], {type: "text/plain;charset=utf-8"});
                                 saveAs(blob, "result.txt");
                             });
-                            setTimeout(function () {
 
-                                $('.main-container').removeClass('show animated fadeOutUp');
-                                $('.main-container').addClass('hide');
-                                $('#result-view-container').addClass('show animated fadeInDown');
+                            let count = 0;
+
+                            const t = setInterval(function () {
+
+                                $('.winner.masked:first').removeClass('masked')
+                                    .append($("<span>", {
+                                        class: "fa fa-trophy"
+                                    }))
+                                    .append($("<span>").text(poorMan[count]));
+                                count++;
+                                if (count === poorMan.length) {
+                                    clearInterval(t);
+                                }
                             }, 1000);
                         });
                     })
@@ -225,7 +233,7 @@
                             <div style={{marginBottom: 5}}>
                                 <label className={"block"}>Font Size (in pixel)</label>
                                 <input value={this.state.fontSize} type="number" placeholder="Font Size (in pixel)" id="font-size"
-                                       onChange={this.handleChangeFontSize} />
+                                       onChange={this.handleChangeFontSize}/>
                             </div>
                             <label htmlFor="rand-without-replacement" className="text-left">
                                 <input checked={!!this.state.isWithoutReplacement} onChange={this.setWithoutReplacement} type="checkbox"
