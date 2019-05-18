@@ -64,42 +64,40 @@
         constructor(props) {
             super(props);
             this.handleAdd = this.handleAdd.bind(this);
-            // this.handleChange = this.handleChange.bind(this);
             this.handleChangeNumberOfDraws = this.handleChangeNumberOfDraws.bind(this);
             this.state = {
                 items: [],
                 input: "",
                 isWithoutReplacement: false,
-                nDraws: 1
+                numberOfDraws: 1
             }
         }
 
         componentDidMount() {
-            const reactCpn = this;
             fetch("/configs")
                 .then((res) => res.json())
                 .then((result) => {
                     this.setState({
                         items: result.candidates,
                         isWithoutReplacement: result.isWithoutReplacement,
-                        nDraws: result.numberOfDraws
+                        numberOfDraws: result.numberOfDraws
                     }, () => {
                         if (result.candidates.length > 0) {
                             window.showEditListView();
                         }
                     })
                 });
-            machine.registerCandidatesUpdateHandler(function (candidates) {
-                reactCpn.setState({
-                    items: candidates
+
+            machine.onSettingChange((settings) => {
+
+                this.setState({
+                    ...settings
                 });
             });
-            machine.registerUpdateIsWithoutReplacementHandler(function (isWithoutReplacement) {
-                reactCpn.setState({isWithoutReplacement: isWithoutReplacement});
-            });
-            machine.registerUpdateNumberOfDrawHandler(function (numberOfDraws) {
-                reactCpn.setState({
-                    nDraws: numberOfDraws
+
+            machine.registerCandidatesUpdateHandler((candidates) => {
+                this.setState({
+                    items: candidates
                 });
             });
         }
@@ -115,11 +113,11 @@
         handleChangeNumberOfDraws(e) {
             const v = e.target.value;
             this.setState({
-                nDraws: v
+                numberOfDraws: v
             }, () => {
                 if (!isNaN(v)) {
 
-                    machine.setNumberOfDraws(v)
+                    machine.setSettings({numberOfDraws: v});
                 }
             })
         }
@@ -149,7 +147,7 @@
         }
 
         setWithoutReplacement() {
-            machine.setWithoutReplacement($('#rand-without-replacement').is(':checked'));
+            machine.setSettings({isWithoutReplacement: $('#rand-without-replacement').is(':checked')});
         }
 
         render() {
@@ -177,7 +175,7 @@
                             </div>
                             <div style={{marginBottom: 5}}>
                                 <label className={"block"}>Number Of Draws per batch</label>
-                                <input value={this.state.nDraws} type="number" placeholder="Number Of Draws" id="number-of-draws"
+                                <input value={this.state.numberOfDraws} type="number" placeholder="Number Of Draws" id="number-of-draws"
                                        onChange={this.handleChangeNumberOfDraws} min={1} max={Math.max(this.state.items.length, 1)}/>
                             </div>
                             <label htmlFor="rand-without-replacement" className="text-left">
