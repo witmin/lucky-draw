@@ -3,12 +3,7 @@ Lucky Draw
 
 A simple lucky draw machine.
 
-Demo on Vimeo: [Watch](https://vimeo.com/103432954)
-
-The demo effect is based on the initial lucky draw version which is with simple batch and vertical rolling animation. The latest version as the Master branch has been upgraded with advanced feature. 
-
-Should you need the simple version as how the demo works, please check out the branch `simple-one-batch-version` here: 
-https://github.com/witmin/lucky-draw/tree/simple-one-batch-version   
+Demo on Vimeo: [Watch](https://vimeo.com/103432954)   
 
 ## Feature
 
@@ -33,5 +28,13 @@ https://github.com/witmin/lucky-draw/tree/simple-one-batch-version
    - On Windows, run <code>npm start</code>
    
 4. Open your browser and visit <code>http://localhost:3000</code>
+
+# Branch: The simple Lucky Draw machine
+
+The demo video is based on the initial lucky draw version which is with simple batch and vertical rolling animation. The latest version as the Master branch has been upgraded with advanced feature. 
+
+Should you need the simple version as how the demo works, please check out the branch `simple-one-batch-version` here: 
+https://github.com/witmin/lucky-draw/tree/simple-one-batch-version
+
 
 Good luck :D
