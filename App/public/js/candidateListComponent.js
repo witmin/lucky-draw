@@ -225,13 +225,13 @@
                                     Delete All
                                 </a>
                             </div>
-                            <div style={{marginBottom: 5}}>
-                                <label className={"block"}>Number Of Draws per batch</label>
+                            <div style={{marginBottom: 16, marginTop: 16 }}>
+                                <label className={"block"} style={{marginBottom: 2}}>Number Of Draws per batch</label>
                                 <input value={this.state.numberOfDraws} type="number" placeholder="Number Of Draws" id="number-of-draws"
                                        onChange={this.handleChangeNumberOfDraws} min={1} max={Math.max(this.state.items.length, 1)}/>
                             </div>
-                            <div style={{marginBottom: 5}}>
-                                <label className={"block"}>Font Size (in pixel)</label>
+                            <div style={{marginBottom: 16, marginTop: 16}}>
+                                <label className={"block"} style={{marginBottom: 2}}>Font Size (in pixel)</label>
                                 <input value={this.state.fontSize} type="number" placeholder="Font Size (in pixel)" id="font-size"
                                        onChange={this.handleChangeFontSize}/>
                             </div>
