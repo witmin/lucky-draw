@@ -11,7 +11,7 @@
         "cookie-parser": "^1.4.5",
         "debug": "^4.1.1",
         "express": "^4.17.1",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "morgan": "^1.10.0",
         "node-sass-middleware": "^0.11.0",
         "socket.io": "^2.3.0",
