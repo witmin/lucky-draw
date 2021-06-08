@@ -139,3 +139,4 @@ typings/
 lucky-draw.iml
 
 App/public/css/style.css
+/App/package-lock.json
